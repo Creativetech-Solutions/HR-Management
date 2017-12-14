@@ -1,6 +1,18 @@
 .navbar-brand img {
    width: 190px;
 }
+.box-login {
+    margin-top: 150px !important;
+}
+.box-forgot {
+    margin-top: 150px !important;
+}
+.box-login input[type="checkbox"]{
+    display: block;
+    opacity: 0;
+    margin-left: 5px;
+    z-index: 9999;
+}
 /* Media Queries
    min 992,768
    max 1200 992 768 480  */

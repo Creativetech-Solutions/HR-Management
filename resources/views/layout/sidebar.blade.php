@@ -226,7 +226,8 @@
                      </ul>
                 </li>
                 <li>
-                    <a href="javascript:void(0)">
+                    <a href="{{ route('logout') }}"onclick="event.preventDefault();
+                       document.getElementById('logout-form').submit();">
                         <div class="item-content">
                             <div class="item-media">
                                 <i class="ti-na"></i>
@@ -236,6 +237,9 @@
                             </div>
                         </div>
                     </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
                  </li>
             </ul>
             <!-- end: MAIN NAVIGATION MENU -->

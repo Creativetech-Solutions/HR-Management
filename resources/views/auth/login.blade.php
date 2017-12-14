@@ -1,7 +1,4 @@
-{{--@extends('layouts.app')--}}
-
-{{--@section('content')--}}
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <!--[if IE 8]><html class="ie8" lang="en"><![endif]-->
 <!--[if IE 9]><html class="ie9" lang="en"><![endif]-->
 <!--[if !IE]><!-->
@@ -15,11 +12,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta content="" name="description" />
     <meta content="" name="author" />
-    <link rel="icon" href="assets/images/logo.png">
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
     {!!Html::style('vendor/bootstrap/css/bootstrap.min.css') !!}
     {!!Html::style('vendor/fontawesome/css/font-awesome.min.css')!!}
-    {!!Html::style('vendor/themify-icons/themify-icons.min.css')!!}
     {!!Html::style('vendor/animate.css/animate.min.css')!!}
     {!!Html::style('vendor/perfect-scrollbar/perfect-scrollbar.min.css')!!}
     {!!Html::style('vendor/switchery/switchery.min.css')!!}
@@ -28,7 +23,7 @@
     {!!Html::style('assets/css/themes/theme-1.css')!!}
     {!!Html::style('css/style.css')!!}
 </head>
-<body>
+<body class="login">
     <div class="row">
         <div class="main-login col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
             <div class="logo margin-top-30">
@@ -54,7 +49,8 @@
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                     @endif
-									<i class="fa fa-user"></i> </span>
+									<i class="fa fa-user"></i>
+                                </span>
                         </div>
                         <div class="form-group form-actions {{ $errors->has('password') ? ' has-error' : '' }}">
 								<span class="input-icon">
@@ -83,7 +79,7 @@
 
                         <div class="new-account">
                             Don't have an account yet?
-                            <a href="login_registration.html">
+                            <a href="{{ route('register') }}">
                                 Create an account
                             </a>
                         </div>
@@ -98,31 +94,23 @@
             <!-- end: LOGIN BOX -->
         </div>
     </div>
-
-    <!-- start: MAIN JAVASCRIPTS -->
     {!!Html::script('vendor/jquery/jquery.min.js')!!}
     {!!Html::script('vendor/bootstrap/js/bootstrap.min.js')!!}
     {!!Html::script('vendor/modernizr/modernizr.js')!!}
     {!!Html::script('vendor/jquery-cookie/jquery.cookie.js')!!}
     {!!Html::script('vendor/perfect-scrollbar/perfect-scrollbar.min.js')!!}
     {!!Html::script('vendor/switchery/switchery.min.js')!!}
-    {!!Html::script('vendor/Chart.js/Chart.min.js')!!}
-    <!-- end: MAIN JAVASCRIPTS -->
-    <!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
-    {!!Html::script('vendor/jquery.sparkline/jquery.sparkline.min.js')!!}
-    <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
-    <!-- start: CLIP-TWO JAVASCRIPTS -->
+    {!!Html::script('vendor/jquery-validation/jquery.validate.min.js')!!}
     {!!Html::script('assets/js/main.js')!!}
-
-    {{--{!!Html::script('assets/js/index.js')!!}--}}
-    <!-- start: JavaScript Event Handlers for this page -->
+    {!!Html::script('assets/js/login.js')!!}
     <script>
         jQuery(document).ready(function() {
             Main.init();
-            //  Index.init();
+            Login.init();
         });
     </script>
-    <!-- end: JavaScript Event Handlers for this page -->
-    <!-- end: CLIP-TWO JAVASCRIPTS -->
+
 </body>
 </html>
+
+
