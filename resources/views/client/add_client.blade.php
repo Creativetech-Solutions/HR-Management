@@ -29,13 +29,14 @@
                                 </label>
                                 <input type="email" placeholder="Text Field" class="form-control" id="email" name="email">
                             </div>
+
                             <div class="form-group">
                                 <label class="control-label">
-                                    Confirm Password <span class="symbol required"></span>
+                                    Password <span class="symbol required"></span>
                                 </label>
-                                <input type="password" class="form-control" id="password_again" name="password_again">
+                                <input type="password" class="form-control" name="password" id="password">
                             </div>
-                            <div class="form-group">
+                             <div class="form-group">
                                 <label class="control-label">
                                     Gender <span class="symbol required"></span>
                                 </label>
@@ -60,10 +61,18 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label">
-                                    Password <span class="symbol required"></span>
+                                    City <span class="symbol required"></span>
                                 </label>
-                                <input type="password" class="form-control" name="password" id="password">
+                                <input class="form-control tooltips" type="text" data-original-title="We'll display it when you write reviews" data-rel="tooltip"  title="" data-placement="top" name="city" id="city">
                             </div>
+                            <div class="form-group">
+                                <label class="control-label">
+                                    Confirm Password <span class="symbol required"></span>
+                                </label>
+                                <input type="password" class="form-control" id="password_again" name="password_again">
+                            </div>
+
+
                             <div class="form-group connected-group">
                                 <label class="control-label">
                                     Date of Birth <span class="symbol required"></span>
@@ -151,15 +160,7 @@
                                         <input class="form-control" type="text" name="zipcode" id="zipcode">
                                     </div>
                                 </div>
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label class="control-label">
-                                            City <span class="symbol required"></span>
-                                        </label>
-                                        <input class="form-control tooltips" type="text" data-original-title="We'll display it when you write reviews" data-rel="tooltip"  title="" data-placement="top" name="city" id="city">
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="form-group">
                                 <hr>
                                 <label class="control-label">

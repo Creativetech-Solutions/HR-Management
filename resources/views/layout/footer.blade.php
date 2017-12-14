@@ -624,17 +624,17 @@
 {!!Html::script('vendor/jquery.sparkline/jquery.sparkline.min.js')!!}
 <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
 <!-- start: CLIP-TWO JAVASCRIPTS -->
+{!!Html::script('vendor/ckeditor/ckeditor.js')!!}
+{!!Html::script('vendor/jquery-validation/jquery.min.js')!!}
+{!!Html::script('vendor/ckeditor/adapters/jquery.js')!!}
 {!!Html::script('assets/js/main.js')!!}
-
-{{--{!!Html::script('assets/js/index.js')!!}--}}
-<!-- start: JavaScript Event Handlers for this page -->
+{!!Html::script('assets/js/form-validation.js')!!}
 <script>
     jQuery(document).ready(function() {
         Main.init();
+        FormValidator.init();
       //  Index.init();
     });
 </script>
-<!-- end: JavaScript Event Handlers for this page -->
-<!-- end: CLIP-TWO JAVASCRIPTS -->
 </body>
 </html>
