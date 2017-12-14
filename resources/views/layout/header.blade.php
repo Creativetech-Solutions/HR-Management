@@ -12,7 +12,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta content="" name="description" />
     <meta content="" name="author" />
-    <link rel="icon" href="assets/images/logo.png">
+    {!!Html::style('assets/images/logo.png') !!}
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
     {!!Html::style('vendor/bootstrap/css/bootstrap.min.css') !!}
     {!!Html::style('vendor/fontawesome/css/font-awesome.min.css')!!}
@@ -36,8 +36,8 @@
                 <a href="#" class="sidebar-mobile-toggler pull-left hidden-md hidden-lg" class="btn btn-navbar sidebar-toggle" data-toggle-class="app-slide-off" data-toggle-target="#app" data-toggle-click-outside="#sidebar">
                     <i class="ti-align-justify"></i>
                 </a>
-                <a class="navbar-brand" href="index.html">
-                    <img src="assets/images/logo.png" alt="Clip-Two"/>
+                <a class="navbar-brand" href="{{url('/')}}">
+                    <img src="{!!url('assets/images/logo.png')!!}" alt="Creative Tech Solutions"/>
                 </a>
                 <a href="#" class="sidebar-toggler pull-right visible-md visible-lg" data-toggle-class="app-sidebar-closed" data-toggle-target="#app">
                     <i class="ti-align-justify"></i>
@@ -173,7 +173,8 @@
                     <!-- start: USER OPTIONS DROPDOWN -->
                     <li class="dropdown current-user">
                         <a href class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="assets/images/avatar-1.jpg" alt="Peter"> <span class="username">Admin<i class="ti-angle-down"></i></i></span>
+                            {!!Html::image('assets/images/avatar-1.jpg')!!}
+                             <span class="username">Admin<i class="ti-angle-down"></i></i></span>
                         </a>
                         <ul class="dropdown-menu dropdown-dark">
                             <li>

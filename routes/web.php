@@ -21,3 +21,4 @@ Auth::routes();
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('');
 Route::get('/employee/view_all', 'Employee\Employee@index');
+Route::get('/client/add', 'Client\Client@index');

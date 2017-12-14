@@ -51,24 +51,24 @@
                     <div class="form-group">
                         <input type="text" class="form-control" name="address" placeholder="Address">
                     </div>
-                    {{--<div class="form-group">--}}
-                        {{--<input type="text" class="form-control" name="city" placeholder="City">--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group">--}}
-                        {{--<label class="block">--}}
-                            {{--Gender--}}
-                        {{--</label>--}}
-                        {{--<div class="clip-radio radio-primary">--}}
-                            {{--<input type="radio" id="rg-female" name="gender" value="female">--}}
-                            {{--<label for="rg-female">--}}
-                                {{--Female--}}
-                            {{--</label>--}}
-                            {{--<input type="radio" id="rg-male" name="gender" value="male">--}}
-                            {{--<label for="rg-male">--}}
-                                {{--Male--}}
-                            {{--</label>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="city" placeholder="City">
+                    </div>
+                    <div class="form-group">
+                        <label class="block">
+                            Gender
+                        </label>
+                        <div class="clip-radio radio-primary">
+                            <input type="radio" id="rg-female" name="gender" value="0">
+                            <label for="rg-female">
+                                Female
+                            </label>
+                            <input type="radio" id="rg-male" name="gender" value="1">
+                            <label for="rg-male">
+                                Male
+                            </label>
+                        </div>
+                    </div>
                     <p>
                         Enter your account details below:
                     </p>
@@ -93,14 +93,6 @@
 									<input id="password-confirm" type="password" class="form-control" name="password_confirmation" required  placeholder="Password Again">
 									<i class="fa fa-lock"></i> </span>
                     </div>
-                    {{--<div class="form-group">--}}
-                        {{--<div class="checkbox clip-check check-primary">--}}
-                            {{--<input type="checkbox" id="agree" value="agree">--}}
-                            {{--<label for="agree">--}}
-                                {{--I agree--}}
-                            {{--</label>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
                     <div class="form-actions">
                         <p>
                             Already have an account?
@@ -116,7 +108,7 @@
             </form>
             <!-- start: COPYRIGHT -->
             <div class="copyright">
-                &copy; <span class="current-year"></span><span class="text-bold text-uppercase"> ClipTheme</span>. <span>All rights reserved</span>
+                &copy; <span class="current-year"></span><span class="text-bold text-uppercase"> Creative Tech Solutions </span>. <span>All rights reserved</span>
             </div>
             <!-- end: COPYRIGHT -->
         </div>

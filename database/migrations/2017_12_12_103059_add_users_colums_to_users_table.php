@@ -21,6 +21,7 @@ class AddUsersColumsToUsersTable extends Migration
             $table->longText('address')->nullable();
             $table->integer('user_type')->nullable();
             $table->integer('status')->nullable();
+            $table->integer('gender')->nullable();
             $table->integer('active')->nullable();
 
         });
