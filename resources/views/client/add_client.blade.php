@@ -23,19 +23,32 @@
                                 </label>
                                 <input type="text" placeholder="Insert your First Name" class="form-control" id="firstname" name="firstname">
                             </div>
-
                             <div class="form-group">
                                 <label class="control-label">
                                     Email Address <span class="symbol required"></span>
                                 </label>
                                 <input type="email" placeholder="Text Field" class="form-control" id="email" name="email">
                             </div>
-
                             <div class="form-group">
                                 <label class="control-label">
                                     Confirm Password <span class="symbol required"></span>
                                 </label>
                                 <input type="password" class="form-control" id="password_again" name="password_again">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">
+                                    Gender <span class="symbol required"></span>
+                                </label>
+                                <div class="clip-radio radio-primary">
+                                    <input type="radio" value="" name="gender" id="gender_female">
+                                    <label for="gender_female">
+                                        Female
+                                    </label>
+                                    <input type="radio" value="" name="gender" id="gender_male">
+                                    <label for="gender_male">
+                                        Male
+                                    </label>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6">
