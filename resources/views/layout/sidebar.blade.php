@@ -98,12 +98,12 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="login_signin.html">
+                            <a href="{{ url('clients') }}">
                                 <span class="title">All Clients</span>
                             </a>
                         </li>
                         <li>
-                            <a href="login_registration.html">
+                            <a href="{{ url('clients/add') }}">
                                 <span class="title"> Add New </span>
                             </a>
                         </li>

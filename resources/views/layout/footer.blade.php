@@ -625,7 +625,7 @@
 <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
 <!-- start: CLIP-TWO JAVASCRIPTS -->
 {!!Html::script('vendor/ckeditor/ckeditor.js')!!}
-{!!Html::script('vendor/jquery-validation/jquery.min.js')!!}
+{!!Html::script('vendor/jquery-validation/jquery.validate.min.js')!!}
 {!!Html::script('vendor/ckeditor/adapters/jquery.js')!!}
 {!!Html::script('assets/js/main.js')!!}
 {!!Html::script('assets/js/form-validation.js')!!}

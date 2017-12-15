@@ -12,7 +12,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta content="" name="description" />
     <meta content="" name="author" />
-    {!!Html::style('assets/images/logo.png') !!}
+    <meta content="" href="assets/images/logo.png" />
+
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
     {!!Html::style('vendor/bootstrap/css/bootstrap.min.css') !!}
     {!!Html::style('vendor/fontawesome/css/font-awesome.min.css')!!}
@@ -37,7 +38,7 @@
                     <i class="ti-align-justify"></i>
                 </a>
                 <a class="navbar-brand" href="{{url('/')}}">
-                    <img src="{!!url('assets/images/logo.png')!!}" alt="Creative Tech Solutions"/>
+                    <img src="http://localhost/cts-ems/public/assets/images/logo.png" alt="Creative Tech Solutions"/>
                 </a>
                 <a href="#" class="sidebar-toggler pull-right visible-md visible-lg" data-toggle-class="app-sidebar-closed" data-toggle-target="#app">
                     <i class="ti-align-justify"></i>

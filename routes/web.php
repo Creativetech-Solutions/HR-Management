@@ -20,5 +20,10 @@ Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('');
-Route::get('/employee/view_all', 'Employee\Employee@index');
-Route::get('/client/add', 'Client\Client@index');
+Route::get('/employees/view_all', 'Employee\Employee@index');
+Route::get('/clients', 'Client\Client@index');
+Route::get('/clients/add', 'Client\Client@add');
+//Route::get('/clients/store', 'Client\Client@store');
+Route::post('/clients/store','Client\Client@store');
+
+
