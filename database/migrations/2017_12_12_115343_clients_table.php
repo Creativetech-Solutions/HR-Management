@@ -16,10 +16,10 @@ class ClientsTable extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->string('platform',100);
-            $table->longText('required_skills');
-            $table->string('last_login',50);
-            $table->integer('status');
+            $table->string('platform',100)->nullable();
+            $table->longText('required_skills')->nullable();
+            $table->string('last_login',50)->nullable();
+            $table->integer('status')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

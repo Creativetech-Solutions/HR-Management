@@ -45,20 +45,6 @@
                                 <input type="password" class="form-control" name="password" id="password">
                             </div>
                             <div class="form-group">
-                                <label>
-                                    Required Skills
-                                </label>
-                                <select multiple="" name="required_skills[]" class="js-example-basic-multiple js-states form-control">
-                                   <?php
-                                     $cl_skills = !empty($cl_data->required_skills) ?  $cl_data->required_skills: " ";
-                                     if(!empty($skills)){
-                                        foreach ($skills as $skill) { ?>
-                                        <option value="<?= $skill->id ?>"<?php if( in_array( $skill->id ,explode(",",$cl_skills))){ echo "selected"; }?>> <?= $skill->skill_name ?></option>
-                                    <?php }}
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
                                 <label>  Country </label>
 
                                 <select   name="country" class="js-example-placeholder-single js-country form-control">
@@ -67,7 +53,7 @@
                                      if($countries->count()){
                                          foreach($countries as $country){?>
                                            <option value="<?= $country->name->common ?>"
-                                                    <?php if(isset($user->country) && $user->country == $country->name->common  ){echo "selected";} ?> >
+                                           <?php if(isset($user->country) && $user->country == $country->name->common  ){echo "selected";} ?> >
                                                  <?= $country->name->common ?></option> <?php
                                          }
                                      }
@@ -80,8 +66,22 @@
                                 </label>
                                 <input class="form-control" type="text" name="zipcode" id="zipcode" value="<?php if(!empty($user->zipcode )){ echo $user->zipcode ;} ?>">
                             </div>
+                            <div class="form-group">
+                                <label class="control-label">
+                                    Gender <span class=""></span>
+                                </label>
+                                <div class="clip-radio radio-primary">
 
-
+                                    <input type="radio" value="0" name="gender" id="gender_female" <?= !empty($user->gender) == 0 ? 'checked' : ''; ?>>
+                                    <label for="gender_female">
+                                        Female
+                                    </label>
+                                    <input type="radio" value="1" name="gender" id="gender_male" <?= !empty($user->gender) == 1 ? 'checked' : ''; ?>>
+                                    <label for="gender_male">
+                                        Male
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
@@ -107,13 +107,6 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label">
-                                    PlatForm <span class=""></span>
-                                </label>
-                                <input type="text" class="form-control" name="platform" id="platform" placeholder="PlatForm"
-                                       value="<?php if(!empty($cl_data->platform)){ echo $cl_data->platform; }  ?>">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">
                                     City <span class=""></span>
                                 </label>
                                 <input type="text" class="form-control" name="city" id="city" placeholder="City"
@@ -121,22 +114,17 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label">
-                                    Gender <span class=""></span>
+                                <label>
+                                    User Role
                                 </label>
-                                <div class="clip-radio radio-primary">
-
-                                    <input type="radio" value="0" name="gender" id="gender_female" <?= !empty($user->gender) == 0 ? 'checked' : ''; ?>>
-                                    <label for="gender_female">
-                                        Female
-                                    </label>
-                                    <input type="radio" value="1" name="gender" id="gender_male" <?= !empty($user->gender) == 1 ? 'checked' : ''; ?>>
-                                    <label for="gender_male">
-                                        Male
-                                    </label>
-                                </div>
+                                <?= !empty($user->user_type) ? $user_type = $user->user_type : $user_type  = " " ;?>
+                                <select multiple="" name="user_type[]" class="js-example-basic-multiple js-states form-control" placeholder="Slect User Role">
+                                    <option value="Admin"    <?php if(in_array("Admin",explode(",",$user_type))){echo "selected";}?> >Admin</option>
+                                    <option value="Client"   <?php if(in_array("Client",explode(",",$user_type))){echo "selected";}?> > Client</option>
+                                    <option value="Developer"<?php if(in_array("Developer",explode(",",$user_type))){echo "selected";}?> > Developer</option>
+                                </select>
                             </div>
-                     </div>
+                         </div>
                     </div>
                 </form>
                 <button class="btn btn-primary btn-wide pull-right" type="submit" id="name_id">

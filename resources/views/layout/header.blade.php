@@ -12,6 +12,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta content="" name="description" />
     <meta content="" name="author" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta content="" href="assets/images/logo.png" />
 
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
@@ -24,6 +25,11 @@
     {!!Html::style('assets/css/styles.css')!!}
     {!!Html::style('assets/css/plugins.css')!!}
     {!!Html::style('assets/css/themes/theme-1.css')!!}
+    {!!Html::style('vendor/select2/select2.min.css')!!}
+    {!!Html::style('vendor/bootstrap-datepicker/bootstrap-datepicker3.standalone.min.css')!!}
+    {!!Html::style('vendor/bootstrap-timepicker/bootstrap-timepicker.min.css')!!}
+    {!!Html::style('vendor/DataTables/css/DT_bootstrap.css')!!}
+    {!!Html::style('vendor/toastr/toastr.min.css')!!}
     {!!Html::style('css/style.css')!!}
 </head>
 <body>
@@ -37,9 +43,11 @@
                 <a href="#" class="sidebar-mobile-toggler pull-left hidden-md hidden-lg" class="btn btn-navbar sidebar-toggle" data-toggle-class="app-slide-off" data-toggle-target="#app" data-toggle-click-outside="#sidebar">
                     <i class="ti-align-justify"></i>
                 </a>
-                <a class="navbar-brand" href="{{url('/')}}">
-                    <img src="http://localhost/cts-ems/public/assets/images/logo.png" alt="Creative Tech Solutions"/>
-                </a>
+
+                    <img class="logo-img" src="http://localhost/cts-ems/public/images/logo.png" alt="Creative Tech Solutions">
+
+
+
                 <a href="#" class="sidebar-toggler pull-right visible-md visible-lg" data-toggle-class="app-sidebar-closed" data-toggle-target="#app">
                     <i class="ti-align-justify"></i>
                 </a>

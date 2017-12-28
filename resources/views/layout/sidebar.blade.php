@@ -2,28 +2,6 @@
 <div class="sidebar app-aside" id="sidebar">
     <div class="sidebar-container perfect-scrollbar">
         <nav>
-            <!-- start: SEARCH FORM -->
-            {{--<div class="search-form">--}}
-                {{--<a class="s-open" href="#">--}}
-                    {{--<i class="ti-search"></i>--}}
-                {{--</a>--}}
-                {{--<form class="navbar-form" role="search">--}}
-                    {{--<a class="s-remove" href="#" target=".navbar-form">--}}
-                        {{--<i class="ti-close"></i>--}}
-                    {{--</a>--}}
-                    {{--<div class="form-group">--}}
-                        {{--<input type="text" class="form-control" placeholder="Search...">--}}
-                        {{--<button class="btn search-button" type="submit">--}}
-                            {{--<i class="ti-search"></i>--}}
-                        {{--</button>--}}
-                    {{--</div>--}}
-                {{--</form>--}}
-            {{--</div>--}}
-            {{--<!-- end: SEARCH FORM -->--}}
-            {{--<!-- start: MAIN NAVIGATION MENU -->--}}
-            {{--<div class="navbar-title">--}}
-                {{--<span>Main Navigation</span>--}}
-            {{--</div>--}}
             <ul class="main-navigation-menu">
                 <li class="active open">
                     <a href="index.html">
@@ -38,7 +16,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="javascript:void(0)">
+                    <a href="{{ url('users') }}">
                         <div class="item-content">
                             <div class="item-media">
                                 <i class="ti-user"></i>
@@ -50,19 +28,19 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="login_signin.html">
+                            <a href="{{ url('users') }}">
                                 <span class="title">All Users</span>
                             </a>
                         </li>
                         <li>
-                            <a href="login_registration.html">
+                            <a href="{{ url('users/add') }}">
                                 <span class="title"> Add New </span>
                             </a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="javascript:void(0)">
+                    <a href="{{url('employee')}}">
                         <div class="item-content">
                             <div class="item-media">
                                 <i class="ti-user"></i>
@@ -74,19 +52,19 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="login_signin.html">
+                            <a href="{{url('employee')}}">
                                 <span class="title">All Developers</span>
                             </a>
                         </li>
                         <li>
-                            <a href="login_registration.html">
+                            <a href="{{url('employee/add')}}">
                                 <span class="title"> Add New </span>
                             </a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="javascript:void(0)">
+                    <a href="{{ url('clients') }}">
                         <div class="item-content">
                             <div class="item-media">
                                 <i class="ti-user"></i>
@@ -110,7 +88,31 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="javascript:void(0)">
+                    <a href="{{ url('skills') }}">
+                        <div class="item-content">
+                            <div class="item-media">
+                                <i class="ti-user"></i>
+                            </div>
+                            <div class="item-inner">
+                                <span class="title"> Skills </span><i class="icon-arrow"></i>
+                            </div>
+                        </div>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="{{ url('skills') }}">
+                                <span class="title">All Skills</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('skills/add') }}">
+                                <span class="title"> Add New </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{{ url('projects') }}">
                         <div class="item-content">
                             <div class="item-media">
                                 <i class="ti-menu-alt"></i>
@@ -122,19 +124,19 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="login_signin.html">
+                            <a href="{{ url('projects') }}">
                                 <span class="title">All Projects</span>
                             </a>
                         </li>
                         <li>
-                            <a href="login_registration.html">
+                            <a href="{{ url('projects/add') }}">
                                 <span class="title"> Add New </span>
                             </a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="javascript:void(0)">
+                    <a href="{{ url('tasks') }}">
                         <div class="item-content">
                             <div class="item-media">
                                 <i class="ti-pencil-alt"></i>
@@ -146,12 +148,12 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="login_signin.html">
+                            <a href="{{ url('tasks') }}">
                                 <span class="title">View All</span>
                             </a>
                         </li>
                         <li>
-                            <a href="login_registration.html">
+                            <a href="{{ url('tasks/add') }}">
                                 <span class="title"> Add New </span>
                             </a>
                         </li>

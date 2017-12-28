@@ -4,10 +4,10 @@
         <!-- start: PAGE TITLE -->
         <section id="page-title">
             <div class="row">
-                <div class="col-sm-8">
-                    <h1 class="mainTitle">Starter Page</h1>
-                    <span class="mainDescription">Use this page to start from scratch and put your custom content</span>
-                </div>
+                {{--<div class="col-sm-8">--}}
+                    {{--<h1 class="mainTitle">Starter Page</h1>--}}
+                    {{--<span class="mainDescription">Use this page to start from scratch and put your custom content</span>--}}
+                {{--</div>--}}
                 <ol class="breadcrumb">
                     <li>
                         <span>Pages</span>
@@ -18,7 +18,7 @@
                 </ol>
             </div>
         </section>
-        <section class="container-fluid container-fullw bg-white">
+        <section class="container-fluid container-fullw bg-white custom-top">
             <div class="row">
                 <div class="col-sm-12">
                     @yield('content')
@@ -33,3 +33,4 @@
 
 
 @include('layout.footer')
+@yield('script')

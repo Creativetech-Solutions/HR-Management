@@ -15,6 +15,7 @@ class SkillsTable extends Migration
     {
         Schema::create('skills', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('status')->default('1');
             $table->string('skill_name',100);
             $table->timestamps();
         });

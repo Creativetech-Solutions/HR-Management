@@ -46,11 +46,11 @@
                             </div>
                             <div class="form-group">
                                 <label>
-                                    Required Skills
+                                    Skills
                                 </label>
                                 <select multiple="" name="required_skills[]" class="js-example-basic-multiple js-states form-control">
                                    <?php
-                                     $cl_skills = !empty($cl_data->required_skills) ?  $cl_data->required_skills: " ";
+                                     $cl_skills = !empty($dev_data->required_skills) ?  $dev_data->required_skills: " ";
                                      if(!empty($skills)){
                                         foreach ($skills as $skill) { ?>
                                         <option value="<?= $skill->id ?>"<?php if( in_array( $skill->id ,explode(",",$cl_skills))){ echo "selected"; }?>> <?= $skill->skill_name ?></option>
@@ -63,7 +63,7 @@
 
                                 <select   name="country" class="js-example-placeholder-single js-country form-control">
                                     <?php
-                                    !empty($cl_data->country) ? $cl_country = $user->country : $cl_country = " ";
+                                    !empty($dev_data->country) ? $cl_country = $user->country : $cl_country = " ";
                                      if($countries->count()){
                                          foreach($countries as $country){?>
                                            <option value="<?= $country->name->common ?>"
@@ -76,9 +76,32 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label">
+                                    Join date <span class=""></span>
+                                </label>
+                                <input type="text" placeholder="join date" class="form-control datepicker" id="join_date" name="join_date"
+                                       value="<?= !empty($dev_data->join_date) ? $dev_data->join_date : " " ?>">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">
                                     Zip Code
                                 </label>
                                 <input class="form-control" type="text" name="zipcode" id="zipcode" value="<?php if(!empty($user->zipcode )){ echo $user->zipcode ;} ?>">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">
+                                    Gender <span class=""></span>
+                                </label>
+                                <div class="clip-radio radio-primary">
+
+                                    <input type="radio" value="0" name="gender" id="gender_female" <?= !empty($user->gender) == 0 ? 'checked' : ''; ?>>
+                                    <label for="gender_female">
+                                        Female
+                                    </label>
+                                    <input type="radio" value="1" name="gender" id="gender_male" <?= !empty($user->gender) == 1 ? 'checked' : ''; ?>>
+                                    <label for="gender_male">
+                                        Male
+                                    </label>
+                                </div>
                             </div>
 
 
@@ -107,10 +130,10 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label">
-                                    PlatForm <span class=""></span>
+                                    Salary <span class=""></span>
                                 </label>
-                                <input type="text" class="form-control" name="platform" id="platform" placeholder="PlatForm"
-                                       value="<?php if(!empty($cl_data->platform)){ echo $cl_data->platform; }  ?>">
+                                <input type="text" class="form-control" name="salary" id="salary" placeholder="Salary"
+                                       value="<?php if(!empty($dev_data->salary)){ echo $dev_data->salary; }  ?>">
                             </div>
                             <div class="form-group">
                                 <label class="control-label">
@@ -119,23 +142,22 @@
                                 <input type="text" class="form-control" name="city" id="city" placeholder="City"
                                        value="<?php if(!empty($user->city)){echo $user->city ;} ?>">
                             </div>
-
                             <div class="form-group">
                                 <label class="control-label">
-                                    Gender <span class=""></span>
+                                    Last Increment <span class=""></span>
                                 </label>
-                                <div class="clip-radio radio-primary">
-
-                                    <input type="radio" value="0" name="gender" id="gender_female" <?= !empty($user->gender) == 0 ? 'checked' : ''; ?>>
-                                    <label for="gender_female">
-                                        Female
-                                    </label>
-                                    <input type="radio" value="1" name="gender" id="gender_male" <?= !empty($user->gender) == 1 ? 'checked' : ''; ?>>
-                                    <label for="gender_male">
-                                        Male
-                                    </label>
-                                </div>
+                                <input type="text" placeholder="last Increment" class="form-control datepicker" id="last_increment" name="last_increment"
+                                       value="<?= !empty($dev_data->last_increment) ? $dev_data->last_increment : " " ?>">
                             </div>
+                            <div class="form-group">
+                                <label class="control-label">
+                                    Total leaves <span class=""></span>
+                                </label>
+                                <input type="text" placeholder="Total leaves" class="form-control" id="total_leaves" name="total_leaves"
+                                       value="<?= !empty($dev_data->total_leaves) ? $dev_data->total_leaves : " " ?>">
+                            </div>
+
+
                      </div>
                     </div>
                 </form>

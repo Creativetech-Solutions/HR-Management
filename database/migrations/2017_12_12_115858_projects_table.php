@@ -15,14 +15,16 @@ class ProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
             $table->integer('client_id')->unsigned();
-            $table->integer('budget');
-            $table->string('currency');
+            $table->integer('budget')->nullable();
+            $table->string('currency')->nullable();
             $table->integer('project_manager');// id
+            $table->longText('required_skills')->nullable();
             $table->integer('project_status');
             $table->integer('payment_status');
-            $table->string('start_date',50);
-            $table->string('due_date',50);
+            $table->string('start_date',50)->nullable();
+            $table->string('due_date',50)->nullable();
             $table->timestamps();
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
         });

@@ -1,5 +1,21 @@
-.navbar-brand img {
-   width: 190px;
+.logo-img {
+    width: 190px;
+    margin: 4px;
+    display: inline-block;
+}
+.model-selecter{
+    z-index: 9999999!important;
+}
+section#page-title {
+    padding: 40px 40px 0px 40px !important;
+}
+#page-title .breadcrumb{
+    margin: 0 !important;
+    top: 30% !important;
+}
+
+.error {
+    color: #cc2828;
 }
 .box-login {
     margin-top: 150px !important;
@@ -13,6 +29,27 @@
     margin-left: 5px;
     z-index: 9999;
 }
+/* custum classes */
+
+.mt-5{
+     margin-top: 5px;
+ }
+.mt-10{
+     margin-top: 10px;
+ }
+.mt-15{
+     margin-top: 15px;
+ }
+.mt-20{
+     margin-top: 20px;
+ }
+.mt-25{
+     margin-top: 25px;
+ }
+.mt-30{
+     margin-top: 30px;
+ }
+
 /* Media Queries
    min 992,768
    max 1200 992 768 480  */

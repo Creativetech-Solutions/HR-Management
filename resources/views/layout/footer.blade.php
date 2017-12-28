@@ -611,6 +611,46 @@
 </div>
 <!-- end: SETTINGS -->
 </div>
+
+<!--- Model for delete publish and unpublish  --->
+</div><div id="deleteModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <h3 class="text-center heading_text"></h3>
+                <br />
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="id">Name:</label>
+                        <div class="col-sm-10">
+                            <input type="hidden" class="form-control" id="id_delete" disabled>
+                            <input type="text" class="form-control" id="name" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group skills_hide">
+                        <label class="control-label col-sm-2" for="title">Email:</label>
+                        <div class="col-sm-10">
+                            <input type="name" class="form-control" id="title_delete" disabled>
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger  custom-button" id = "" data-dismiss="modal">
+
+                    </button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">
+                        <span class='glyphicon glyphicon-remove'></span> Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- start: MAIN JAVASCRIPTS -->
 {!!Html::script('vendor/jquery/jquery.min.js')!!}
 {!!Html::script('vendor/bootstrap/js/bootstrap.min.js')!!}
@@ -619,22 +659,38 @@
 {!!Html::script('vendor/perfect-scrollbar/perfect-scrollbar.min.js')!!}
 {!!Html::script('vendor/switchery/switchery.min.js')!!}
 {!!Html::script('vendor/Chart.js/Chart.min.js')!!}
+{!!Html::script('vendor/select2/select2.min.js')!!}
+{!!Html::script('vendor/DataTables/jquery.dataTables.min.js')!!}
+{!!Html::script('vendor/bootstrap-datepicker/bootstrap-datepicker.min.js')!!}
+{!!Html::script('vendor/bootstrap-timepicker/bootstrap-timepicker.min.js')!!}
 <!-- end: MAIN JAVASCRIPTS -->
 <!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
 {!!Html::script('vendor/jquery.sparkline/jquery.sparkline.min.js')!!}
 <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
 <!-- start: CLIP-TWO JAVASCRIPTS -->
+{!!Html::script('vendor/maskedinput/jquery.maskedinput.min.js')!!}
+{!!Html::script('vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js')!!}
+{!!Html::script('vendor/autosize/autosize.min.js')!!}
+{!!Html::script('vendor/selectFx/classie.js')!!}
+{!!Html::script('vendor/selectFx/selectFx.js')!!}
 {!!Html::script('vendor/ckeditor/ckeditor.js')!!}
 {!!Html::script('vendor/jquery-validation/jquery.validate.min.js')!!}
 {!!Html::script('vendor/ckeditor/adapters/jquery.js')!!}
+{!!Html::script('vendor/toastr/toastr.min.js')!!}
 {!!Html::script('assets/js/main.js')!!}
 {!!Html::script('assets/js/form-validation.js')!!}
+{!!Html::script('assets/js/table-data.js')!!}
+{!!Html::script('assets/js/form-elements.js')!!}
 <script>
     jQuery(document).ready(function() {
         Main.init();
+        FormElements.init();
         FormValidator.init();
+        TableData.init();
       //  Index.init();
     });
 </script>
+
+
 </body>
 </html>

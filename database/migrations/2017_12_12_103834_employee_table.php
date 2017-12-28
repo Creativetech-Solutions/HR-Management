@@ -16,11 +16,13 @@ class EmployeeTable extends Migration
         Schema::create('employee', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->string('join_date',50);
-            $table->string('last_increment',50);
-            $table->integer('salary');
-            $table->integer('total_leaves');
+            $table->string('join_date',50)->nullable();
+            $table->string('last_increment',50)->nullable();
+            $table->string('required_skills',150)->nullable();
+            $table->integer('salary')->nullable();
+            $table->integer('total_leaves')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps();
          });
     }
 
