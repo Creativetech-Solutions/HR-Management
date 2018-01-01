@@ -177,6 +177,13 @@ class Tasks extends Controller
         $data     = $Project->delete();
         return response()->json($data);
     }
+    public function multiple_upload(Request $request) {
+        // getting all of the post data
+        $file1 = $request->file('images')->getClientOriginalName();
+                $request->file('images')->move(
+            base_path().'/public/images/', $file1
+        );
+     }
 }
 
 

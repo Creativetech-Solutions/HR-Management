@@ -642,6 +642,7 @@
                     <button type="button" class="btn btn-danger  custom-button" id = "" data-dismiss="modal">
 
                     </button>
+                    <button type="button" class="btn hide  btn-danger rejected" id="" data-dismiss="modal">Reject</button>
                     <button type="button" class="btn btn-warning" data-dismiss="modal">
                         <span class='glyphicon glyphicon-remove'></span> Close
                     </button>

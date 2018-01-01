@@ -16,12 +16,13 @@ class LeaveTable extends Migration
         Schema::create('leave', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('emp_id')->unsigned();
-            $table->string('applied_date',50);
-            $table->string('leave_from',50);
-            $table->string('leave_to',50);
-            $table->integer('status');
-            $table->string('approved_date',50);
-            $table->integer('approved_by');
+            $table->integer('total_leave')->nullable();
+            $table->string('description')->nullable();
+            $table->string('leave_from',50)->nullable();
+            $table->string('leave_to',50)->nullable();
+            $table->integer('status')->default('0');
+            $table->string('approved_date',50)->nullable();
+            $table->integer('approved_by')->nullable();
             $table->timestamps();
             $table->foreign('emp_id')->references('id')->on('employee')->onDelete('cascade');
         });

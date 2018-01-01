@@ -172,13 +172,13 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="login_signin.html">
-                                <span class="title">Apply Leave</span>
+                            <a href="{{ url('leave') }}">
+                                <span class="title">View All</span>
                             </a>
                         </li>
                         <li>
-                            <a href="login_registration.html">
-                                <span class="title"> View All </span>
+                            <a href="{{ url('leave/apply') }}">
+                                <span class="title"> Apply Leave</span>
                             </a>
                         </li>
                     </ul>
@@ -196,12 +196,17 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="login_signin.html">
+                            <a href="{{url('salary/transactions')}}">
                                 <span class="title">Salary Transactions </span>
                             </a>
                         </li>
                         <li>
-                            <a href="login_registration.html">
+                            <a href="{{url('salary/new_transaction')}}">
+                                <span class="title">New Transaction </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{url('salary/increment_due')}}">
                                 <span class="title"> Employees Increment Due </span>
                             </a>
                         </li>

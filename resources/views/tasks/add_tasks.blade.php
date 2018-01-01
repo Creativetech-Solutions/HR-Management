@@ -7,7 +7,7 @@
                 <h2><?= $title; ?></h2>
                  <hr>
 
-                <form id="form3" method="POST" action="{{url($action_url)}}" role="form" >
+                <form id="form3" method="POST" action="{{url($action_url)}}" role="form" enctype="multipart/form-data" accept-charset="UTF-8">
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-12">
@@ -90,25 +90,19 @@
                                    <?php }}?>
                                  </select>
                             </div>
-                            <div class="form-group">
-                                <label>
-                                    Assigned Date
+                           <div class="form-group">
+                                <label class="control-label">
+                                     Assigned Date <span class=""></span>
                                 </label>
-                                <select  name="assigned_date" class="js-example-placeholder-single   form-control" placeholder="Assigned Date">
-                                    <?php if($employee){
-                                    foreach($employee as $employees){?>
-                                    <option value="<?= $employees->id ?>" <?php if(isset($projects->project_manager) && $projects->project_manager == $employees->id ){ echo "Selected";}?>>
-                                        <?= $employees->name ?></option>
-                                    <?php }}?>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
+                                <input type="text" placeholder="Task End Date" class="form-control datepicker" id="due_date" name="due_date"
+                                      value="<?= !empty($projects->due_date) ? $projects->due_date : " " ?>">
+                           </div>
+                           <div class="form-group">
                                 <label class="control-label">
                                     Task Due Date <span class=""></span>
                                 </label>
-                                <input type="text" placeholder="Task End Date" class="form-control datepicker" id="due_date" name="due_date"
-                                       value="<?= !empty($projects->due_date) ? $projects->due_date : " " ?>">
+                                <input type="text" placeholder="Assigned Date" class="form-control datepicker" id="assigned_date" name="assigned_date"
+                                       value="<?= !empty($projects->assigned_date) ? $projects->assigned_date : " " ?>">
                             </div>
                         </div>
                     </div>
@@ -121,6 +115,19 @@
                                 <textarea class="form-control autosize area-animated" name="description">
                                 </textarea>
                             </div>
+                            <div class="row fileupload-buttonbar">
+                                <div class="col-lg-7">
+                                    <!-- The fileinput-button span is used to style the file input field as button -->
+                                    <span class="btn btn-success fileinput-button"> <i class="glyphicon glyphicon-plus"></i> <span>Add files...</span>
+													<input type="file" name="images[]" multiple>
+												</span>
+                                    <!-- The loading indicator is shown during file processing -->
+                                    <span class="fileupload-loading"></span>
+
+                                </div>
+
+                            </div>
+
                         </div>
                     </div>
                   </form>

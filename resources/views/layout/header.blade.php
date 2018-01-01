@@ -30,6 +30,7 @@
     {!!Html::style('vendor/bootstrap-timepicker/bootstrap-timepicker.min.css')!!}
     {!!Html::style('vendor/DataTables/css/DT_bootstrap.css')!!}
     {!!Html::style('vendor/toastr/toastr.min.css')!!}
+    {!!Html::style('vendor/jquery-file-upload/css/jquery.fileupload-ui.css')!!}
     {!!Html::style('css/style.css')!!}
 </head>
 <body>
@@ -180,10 +181,11 @@
                     {{--</li>--}}
                     <!-- start: LANGUAGE SWITCHER -->
                     <!-- start: USER OPTIONS DROPDOWN -->
+                    <div class="login_user_id" style="display: none"> <?= $userId = Auth::id();?>  </div>>
                     <li class="dropdown current-user">
                         <a href class="dropdown-toggle" data-toggle="dropdown">
                             {!!Html::image('assets/images/avatar-1.jpg')!!}
-                             <span class="username">Admin<i class="ti-angle-down"></i></i></span>
+                             <span class="username">Admin<i class="ti-angle-down"></i></span>
                         </a>
                         <ul class="dropdown-menu dropdown-dark">
                             <li>

@@ -89,6 +89,7 @@ Route::get('/get-data-employee', ['as'=>'get.employee_data','uses'=>'Employee\Em
 //   Add
 Route::get('/tasks/add', 'Tasks\Tasks@add');
 Route::post('/tasks/store','Tasks\Tasks@store');
+
 //   edit
 Route::get('/tasks/edit/{id}', ['as'=>'tasks.edit','uses'=>'Tasks\Tasks@edit']);     // use like this when url send from view
 Route::post('/tasks/update/{id}','Tasks\Tasks@update');
@@ -101,3 +102,38 @@ Route::delete('/tasks_delete/{id}', ['as'=>'tasks_delete','uses'=>'Tasks\Tasks@d
 Route::post('/tasks_status/', ['as'=>'tasks_status','uses'=>'Tasks\Tasks@change_status']);
 Route::post('/tasks_pay_status/', ['as'=>'tasks_pay_status','uses'=>'Tasks\Tasks@change_payment_status']);
 Route::POST('/check_tasks_name', ['as'=>'check_tasks_name','uses'=>'Tasks\Tasks@check_tasks_name']);
+
+
+// **************** Leaves *******************************
+
+Route::get('/leave/apply', 'Leave\Leave@add');
+Route::post('/leave/store','Leave\Leave@store');
+//  edit
+Route::get('/leave/edit/{id}', ['as'=>'leave.edit','uses'=>'Leave\Leave@edit']);     // use like this when url send from view
+Route::post('/leave/update/{id}','Leave\Leave@update');
+//   View
+Route::get('/leave', 'Leave\Leave@index');
+Route::get('/get-data-leave', ['as'=>'get.leave_data','uses'=>'Leave\Leave@getData']);
+// approve
+Route::post('/approve_leave','Leave\Leave@approve_leave');
+// delete
+Route::delete('/leave_delete/{id}', ['as'=>'leave_delete','uses'=>'Leave\Leave@destroy']);
+
+// **************** Salary *******************************
+
+Route::get('/salary/new_transaction', 'Salary\Salary@add');
+Route::post('/salary/store','Salary\Salary@store');
+//  edit
+Route::get('/salary/edit/{id}', ['as'=>'salary.edit','uses'=>'Salary\Salary@edit']);     // use like this when url send from view
+Route::post('/salary/update/{id}','Salary\Salary@update');
+//   View salary transactions
+Route::get('/salary/transactions', 'Salary\Salary@index');
+Route::get('/get-data-salary', ['as'=>'get.salary_data','uses'=>'Salary\Salary@getData']);
+// view Employees Increment Due
+Route::get('/salary/increment_due', 'Salary\Salary@increment_due');
+Route::get('/get-data-increment_due', ['as'=>'get.increment_due','uses'=>'Salary\Salary@increment_due_data']);
+// delete
+Route::delete('/salary_delete/{id}', ['as'=>'salary_delete','uses'=>'Salary\Salary@destroy']);
+// change status
+//   Change Status
+Route::post('salary_tran_status','Salary\Salary@salary_tran_status');
