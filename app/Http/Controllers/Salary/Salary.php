@@ -83,9 +83,9 @@ class Salary extends Controller
         $employee   = DB::table('employee as em')->select('us.name','em.id','em.salary')->Join('users as us', 'em.user_id', '=', 'us.id')->where('us.status','=','1')->get();
         $salary     = Salary_transaction::find($id);
         return view('salary.add_salary', [
-            'title'     => $title,
-            'action_url'=> $action_url,
-            'employee'  => $employee,
+            'title'      => $title,
+            'action_url' => $action_url,
+            'employee'   => $employee,
             'salary'     => $salary,
         ]);
     }
