@@ -17,6 +17,7 @@ class Setting extends Controller
     {
         $this->middleware('auth');
     }
+    //This Method is to view/display Logo
     public function logo(){
         $data = Settings::find(1);
          return view('settings.logo',['title'=>'Update Logo','data'=>$data,'action_url'=>'settings/update/1']);
