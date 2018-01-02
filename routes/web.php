@@ -131,9 +131,16 @@ Route::get('/salary/transactions', 'Salary\Salary@index');
 Route::get('/get-data-salary', ['as'=>'get.salary_data','uses'=>'Salary\Salary@getData']);
 // view Employees Increment Due
 Route::get('/salary/increment_due', 'Salary\Salary@increment_due');
-Route::get('/get-data-increment_due', ['as'=>'get.increment_due','uses'=>'Salary\Salary@increment_due_data']);
+Route::get('/get-data-increment_due_data', ['as'=>'get.increment_due_data','uses'=>'Salary\Salary@increment_due_data']);
 // delete
-Route::delete('/salary_delete/{id}', ['as'=>'salary_delete','uses'=>'Salary\Salary@destroy']);
+Route::delete('salary/destroy/{id}', ['as'=>'destroy','uses'=>'Salary\Salary@destroy']);
 // change status
 //   Change Status
-Route::post('salary_tran_status','Salary\Salary@salary_tran_status');
+Route::post('salary/change_status', ['as'=>'change_status','uses'=>'Salary\Salary@change_status']);
+Route::post('salary/increase_salary', ['as'=>'increase_salary','uses'=>'Salary\Salary@increase_salary']);
+
+//    Settings
+// update Logo
+Route::post('salary/increase_salary', ['as'=>'increase_salary','uses'=>'Salary\Salary@increase_salary']);
+
+

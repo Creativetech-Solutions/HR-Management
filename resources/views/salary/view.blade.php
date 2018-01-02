@@ -76,13 +76,13 @@
         $('.modal-footer').on('click', '.delete', function() {
             $.ajax({
                 type: 'DELETE',
-                url: 'users_delete/' + id,
+                url: 'destroy/' + id,
                 data: {
                     '_token': $('input[name=_token]').val(),
                 },
                 success: function(data) {
                     if(data === true )
-                        toastr.success('Successfully deleted Client!', 'Success Alert', {timeOut: 3000});
+                        toastr.success('Successfully deleted Salary Transactions!', 'Success Alert', {timeOut: 3000});
                     $('.custom-button').removeClass('delete');
                     oTable.draw();
                 }
@@ -104,7 +104,7 @@
         $('.modal-footer').on('click', '.status_Change', function() {
             $.ajax({
                 type: 'Post',
-                url: 'salary_tran_status',
+                url: 'change_status',
                 data: {
                     'id':id,
                     'status':status,

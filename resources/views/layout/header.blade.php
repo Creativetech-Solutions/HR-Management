@@ -181,7 +181,7 @@
                     {{--</li>--}}
                     <!-- start: LANGUAGE SWITCHER -->
                     <!-- start: USER OPTIONS DROPDOWN -->
-                    <div class="login_user_id" style="display: none"> <?= $userId = Auth::id();?>  </div>>
+                    <div class="login_user_id" style="display: none"> <?= $userId = Auth::id();?>  </div>
                     <li class="dropdown current-user">
                         <a href class="dropdown-toggle" data-toggle="dropdown">
                             {!!Html::image('assets/images/avatar-1.jpg')!!}

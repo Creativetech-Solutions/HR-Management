@@ -234,14 +234,12 @@
                 success: function(data) {
                     if(data === true )
                         toastr.success('Successfully deleted Project!', 'Success Alert', {timeOut: 3000});
-                  //  $('.custom-button').removeClass('delete');
+                    $('.custom-button').removeClass('delete');
                     oTable.draw();
                 }
             });
         });
-
-
-        $('.alert').delay(3000).fadeOut();
+       $('.alert').delay(3000).fadeOut();
     });
 </script>
 @stop

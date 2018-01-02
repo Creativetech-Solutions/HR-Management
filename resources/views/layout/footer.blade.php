@@ -626,14 +626,14 @@
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="id">Name:</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-9">
                             <input type="hidden" class="form-control" id="id_delete" disabled>
                             <input type="text" class="form-control" id="name" disabled>
                         </div>
                     </div>
                     <div class="form-group skills_hide">
                         <label class="control-label col-sm-2" for="title">Email:</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-9">
                             <input type="name" class="form-control" id="title_delete" disabled>
                         </div>
                     </div>

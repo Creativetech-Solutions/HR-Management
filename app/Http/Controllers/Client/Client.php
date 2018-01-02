@@ -13,7 +13,7 @@ use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse ; // for data table
 
 
-class client extends Controller
+class Client extends Controller
 {
     public function __construct()
     {
@@ -52,7 +52,7 @@ class client extends Controller
         $skills     = DB::table('skills')->where('status','=',1)->get();
         $user       = " ";
         $cl_data    = " ";
-        return view('client.Add_client', ['title'=>$title,'action_url'=>$action_url,'user'=>$user,'cl_data'=>$cl_data,'skills' => $skills,'countries'=>$countries]);
+        return view('client.add_client', ['title'=>$title,'action_url'=>$action_url,'user'=>$user,'cl_data'=>$cl_data,'skills' => $skills,'countries'=>$countries]);
     }
     public function store(Request $request)
     {
@@ -88,7 +88,7 @@ class client extends Controller
         $user       = User::find($id);
         $cl_data    = User::find($id)->clients()->first();  // call function in user class clients
         $cl_data    = $cl_data ?  $cl_data : " " ;
-        return view('client.Add_client', [
+        return view('client.add_client', [
             'cl_data'   =>  $cl_data,
             'user'      =>  $user,
             'title'     =>  $title,

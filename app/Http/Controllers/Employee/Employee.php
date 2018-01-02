@@ -52,7 +52,7 @@ class Employee extends Controller
         $skills      = DB::table('skills')->where('status','=',1)->get();
         $user        = " ";
         $dev_data    = " ";
-        return view('employee.Add_employee', [
+        return view('employee.add_employee', [
             'title'     => $title,
             'action_url'=> $action_url,
             'user'      => $user,

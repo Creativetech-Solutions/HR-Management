@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers\Salary;
+    use App\model\Employees;
     use App\model\Leaves;
     use App\model\Salary_transaction;
     use App\Http\Requests;
@@ -42,6 +43,31 @@ class Salary extends Controller
                     return '<span class="publish-modal btn btn-xs btn-danger"  data-id="'.$salary->id.'" data-title="'.$salary->name.'" data-content="'.$salary->email.'" data-status="'.$salary->status.'">Pending</span>';
                 }})
             ->rawColumns(array("action", "status"))//rawColumns used for multiple column
+            ->make(true);
+        return $data;
+    }
+    public function increment_due(){
+         return view('salary.inc_due');
+    }
+    public function increment_due_data() // get data form user table
+    {
+        $date = date("Y-m-d H:i:s");
+        $effectiveDate = date('Y-m-d H:i:s', strtotime("-6 months", strtotime($date)));
+        
+        $employee = DB::table('employee as em')
+            ->leftJoin('users as us', 'em.user_id', '=', 'us.id')
+            ->where('us.status','=',1)
+           ->whereDate('em.last_increment', '<', $effectiveDate)
+           ->select('em.id','us.name as name','us.email as email','em.salary as salary','em.last_increment as last_increment','us.status as status');
+         $data = Datatables::of($employee)
+            ->escapeColumns()
+            ->addColumn('status',function($employee){
+                  return '<span class="btn btn-xs btn-warning" data-id="'.$employee->id.'" data-title="'.$employee->name.'" data-content="'.$employee->email.'" data-status="'.$employee->status.'">Increment Due</span>';
+                 })
+             ->addColumn('Action',function($employee){
+                 return '<span class="increase_salary btn btn-xs btn-success" data-id="'.$employee->id.'" data-title="'.$employee->name.'" data-content="'.$employee->email.'" data-status="'.$employee->salary.'">Increase Salary</span>';
+             })
+            ->rawColumns(array("status","Action"))//rawColumns used for multiple column
             ->make(true);
         return $data;
     }
@@ -91,21 +117,23 @@ class Salary extends Controller
     }
     public function update(Request $request,$id)
     {
-        $leaves                = Leaves::find($id);
-        $leaves->emp_id        = $request->emp_id;
-        $leaves->total_leave   = $request->total_leave;
-        $leaves->description   = $request->description;
-        $leaves->leave_from    = date("Y-m-d H:i:s",strtotime($request->leave_from));
-        $leaves->leave_to      = date("Y-m-d H:i:s",strtotime($request->leave_to));
-        $leaves->save();
-        return redirect('leave')->with('message', 'leave Application updated successfully!');
+        $amount = $request->salary;
+        !empty($request->bonus)    ? $amount = $amount + $request->bonus     : $amount;
+        !empty($request->deduction)? $amount = $amount - $request->deduction : $amount;
+        $salary                = Salary_transaction::find($id);
+        $salary->emp_id        = $request->emp_id;
+        $salary->amount        = $amount;
+        $salary->bonus         = $request->bonus;
+        $salary->deduction     = $request->deduction;
+        $salary->trans_date    =  date("Y-m-d H:i:s",strtotime($request->trans_date));
+        $salary->salary_month  =  date("Y-m-d H:i:s",strtotime($request->salary_month));
+         $salary->save();
+        return redirect('salary/transactions')->with('message', 'salary Transactions updated successfully!');
     }
-    public function salary_tran_status(Request $request){
-
-        echo "here";
+    public function change_status(Request $request){
         $salary_id = $request->id;
         $status    = $request->status;
-
+        $status    = $status == 1 ? 0 : 1 ;
         $data      = Salary_transaction::find($salary_id)->update(array('status'=> $status));
         if($data == true){
             return response()->json($data);
@@ -115,8 +143,20 @@ class Salary extends Controller
     }
     public function destroy($id)
     {
-        $Project  = Leaves::findOrFail($id);
+        $Project  = Salary_transaction::findOrFail($id);
         $data     = $Project->delete();
         return response()->json($data);
+    }
+    public function increase_salary(Request $request){
+        $em_di      = $request->id;
+        $employee   = Employees::find($em_di);
+        $employee->salary += $request->salary;
+        $employee->last_increment = date('Y-m-d H:i:s');
+        $data = $employee->save();
+        if($data == true){
+            return response()->json($data);
+        }else{
+            return response()->json($data);
+        }
     }
 }
