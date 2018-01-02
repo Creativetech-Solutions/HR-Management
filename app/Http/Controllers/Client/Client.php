@@ -19,6 +19,8 @@ class Client extends Controller
     {
         $this->middleware('auth');
     }
+
+    //Need to work on the client dashboard
     public function index()
     {
         return view('client.view');
