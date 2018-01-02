@@ -141,6 +141,8 @@ Route::post('salary/increase_salary', ['as'=>'increase_salary','uses'=>'Salary\S
 
 //    Settings
 // update Logo
-Route::post('salary/increase_salary', ['as'=>'increase_salary','uses'=>'Salary\Salary@increase_salary']);
+Route::get('settings/logo', 'Settings\Setting@logo');
+Route::post('/settings/update/{id}','Settings\Setting@update');
+
 
 

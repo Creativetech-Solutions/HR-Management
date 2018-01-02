@@ -31,6 +31,7 @@
     {!!Html::style('vendor/DataTables/css/DT_bootstrap.css')!!}
     {!!Html::style('vendor/toastr/toastr.min.css')!!}
     {!!Html::style('vendor/jquery-file-upload/css/jquery.fileupload-ui.css')!!}
+    {!!Html::style('vendor/bootstrap-fileinput/jasny-bootstrap.min.css')!!}
     {!!Html::style('css/style.css')!!}
 </head>
 <body>

@@ -6,8 +6,13 @@
             <div class="col-md-12">
                 <h2><?= $title; ?></h2>
                 <hr>
+                @if(Session::has('message'))
+                    <div class="alert alert-success">
+                        {{ Session::get('message')}}
+                    </div>
+                @endif
 
-                <form id="form3" method="POST" action="{{url($action_url)}}" role="form">
+                <form id="form3" method="POST" action="{{url($action_url)}}" role="form" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-12">
@@ -21,15 +26,28 @@
                     </div>
                     <div class="row">
                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="control-label">
-                                    Update Logo <span class="symbol required"></span>
-                                </label>
-                                <input type="text" name="logo" value=""  id="logo"  class="form-control ">
+                           <div class="form-group">
+                               <label>
+                                   Image Uploaded
+                               </label>
+                               <?= print_r($data);
 
-
-                            </div>
-
+                              // echo $data->logo;
+                               exit;?>
+                               <div class="fileinput fileinput-new" data-provides="fileinput">
+                                   <div class="fileinput-new thumbnail"><img src="{{URL::asset('/images/logo/'.$data->logo)}}" alt="">
+                                   </div>
+                                   <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                   <div class="user-edit-image-buttons">
+										<span class="btn btn-azure btn-file"><span class="fileinput-new"><i class="fa fa-picture"></i> Select image</span><span class="fileinput-exists"><i class="fa fa-picture"></i> Change</span>
+												<input type="file"name="logo" id="logo" value="">
+										</span>
+                                       <a href="#" class="btn fileinput-exists btn-red" data-dismiss="fileinput">
+                                           <i class="fa fa-times"></i> Remove
+                                       </a>
+                                   </div>
+                               </div>
+                           </div>
                         </div>
                     </div>
 
@@ -78,6 +96,7 @@
                 var selected = $('#email').find("option:selected").attr("data-id");
                 $('.emp_salary').val(selected);
             });
+            $('.alert').delay(3000).fadeOut();
         });
     </script>
 @stop

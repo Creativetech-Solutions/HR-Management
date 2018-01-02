@@ -682,6 +682,8 @@
 {!!Html::script('assets/js/form-validation.js')!!}
 {!!Html::script('assets/js/table-data.js')!!}
 {!!Html::script('assets/js/form-elements.js')!!}
+{!!Html::script('vendor/bootstrap-fileinput/jasny-bootstrap.js')!!}
+
 <script>
     jQuery(document).ready(function() {
         Main.init();

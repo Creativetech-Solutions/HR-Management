@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Settings;
 
 use App\Http\Requests;
+use App\model\Settings;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -17,9 +18,24 @@ class Setting extends Controller
         $this->middleware('auth');
     }
     public function logo(){
-        return view('settings.logo');
+        $data = Settings::find(1);
+         return view('settings.logo',['title'=>'Update Logo','data'=>$data,'action_url'=>'settings/update/1']);
     }
-    public function update_logo( Request $request){
-       // $settings $settings->
+    public function update( Request $request){
+
+        if($request->hasFile('logo')) {
+            $file = $request->file('logo');
+            $name = 'logo'.'.'.$file->getClientOriginalExtension();
+            $image['filePath'] = $name;
+            $file->move('assets/images/logo', $name);
+        }else{
+            $name =" ";
+        }
+        $updated   = Settings::find(1)->update(array('logo'=>$name));
+        if($updated){
+            return  redirect('settings/logo')->with('message', 'Data Updated Successfully!');
+        }else{
+            return  redirect('settings/logo')->with('message', 'Something happened Wrong Please Try again!');
+        }
     }
 }
