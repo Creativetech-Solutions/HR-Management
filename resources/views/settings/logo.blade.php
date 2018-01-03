@@ -1,6 +1,7 @@
 @extends('layout.layout')
 @section('content')
 @parent
+{{$site_settings}}
 <h2><?= $title; ?></h2>
                 <hr>
                 @if(Session::has('message'))
