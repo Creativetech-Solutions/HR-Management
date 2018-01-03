@@ -1,10 +1,7 @@
 @extends('layout.layout')
 @section('content')
     @parent
-    <div class="container-fluid container-fullw bg-white">
-        <div class="row">
-            <div class="col-md-12">
-                <h2><?= $title; ?></h2>
+    <h2><?= $title; ?></h2>
                 <hr>
 
                 <form id="form3" method="POST" action="{{url($action_url)}}" role="form" enctype="multipart/form-data" accept-charset="UTF-8">
@@ -134,11 +131,6 @@
                         Submit <i class="fa fa-arrow-circle-right"></i>
                     </button>
                 </form>
-            </div>
-        </div>
-    </div>
-
-
 @stop
 @section('script')
     @parent

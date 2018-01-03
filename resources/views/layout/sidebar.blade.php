@@ -15,7 +15,7 @@
                         </div>
                     </a>
                 </li>
-                <li>
+                <li class="{{ (Request::is('users') || Request::is('users/add') ? 'active open' : '') }}">
                     <a href="{{ url('users') }}">
                         <div class="item-content">
                             <div class="item-media">
@@ -27,19 +27,19 @@
                         </div>
                     </a>
                     <ul class="sub-menu">
-                        <li>
+                        <li class="{{ (Request::is('users') ? 'active' : '') }}">
                             <a href="{{ url('users') }}">
                                 <span class="title">All Users</span>
                             </a>
                         </li>
-                        <li>
+                        <li class="{{ (Request::is('users/add') ? 'active' : '') }}">
                             <a href="{{ url('users/add') }}">
                                 <span class="title"> Add New </span>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li class="{{ (Request::is('employee') || Request::is('employee/add') ? 'active open' : '') }}">
                     <a href="{{url('employee')}}">
                         <div class="item-content">
                             <div class="item-media">
@@ -51,19 +51,19 @@
                         </div>
                     </a>
                     <ul class="sub-menu">
-                        <li>
+                        <li class="{{ (Request::is('employee') ? 'active' : '') }}">
                             <a href="{{url('employee')}}">
                                 <span class="title">All Developers</span>
                             </a>
                         </li>
-                        <li>
+                        <li class="{{(Request::is('employee/add') ? 'active ' : '') }}">
                             <a href="{{url('employee/add')}}">
                                 <span class="title"> Add New </span>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li class="{{ (Request::is('clients') || Request::is('clients/add') ? 'active open' : '') }}">
                     <a href="{{ url('clients') }}">
                         <div class="item-content">
                             <div class="item-media">
@@ -75,19 +75,19 @@
                         </div>
                     </a>
                     <ul class="sub-menu">
-                        <li>
+                        <li class="{{ (Request::is('clients') ? 'active' : '') }}">
                             <a href="{{ url('clients') }}">
                                 <span class="title">All Clients</span>
                             </a>
                         </li>
-                        <li>
+                        <li class="{{ (Request::is('clients/add') ? 'active' : '') }}">
                             <a href="{{ url('clients/add') }}">
                                 <span class="title"> Add New </span>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li class="{{ (Request::is('skills') || Request::is('skills/add') ? 'active open' : '') }}">
                     <a href="{{ url('skills') }}">
                         <div class="item-content">
                             <div class="item-media">
@@ -99,19 +99,19 @@
                         </div>
                     </a>
                     <ul class="sub-menu">
-                        <li>
+                        <li class="{{ (Request::is('skills') ? 'active' : '') }}">
                             <a href="{{ url('skills') }}">
                                 <span class="title">All Skills</span>
                             </a>
                         </li>
-                        <li>
+                        <li class="{{ (Request::is('skills/add') ? 'active' : '') }}">
                             <a href="{{ url('skills/add') }}">
                                 <span class="title"> Add New </span>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li class="{{ (Request::is('projects') || Request::is('projects/add') ? 'active open' : '') }}">
                     <a href="{{ url('projects') }}">
                         <div class="item-content">
                             <div class="item-media">
@@ -123,19 +123,19 @@
                         </div>
                     </a>
                     <ul class="sub-menu">
-                        <li>
+                        <li class="{{ (Request::is('projects')  ? 'active' : '') }}">
                             <a href="{{ url('projects') }}">
                                 <span class="title">All Projects</span>
                             </a>
                         </li>
-                        <li>
+                        <li class="{{ (Request::is('projects/add')  ? 'active' : '') }}">
                             <a href="{{ url('projects/add') }}">
                                 <span class="title"> Add New </span>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li class="{{ (Request::is('tasks') || Request::is('tasks/add') ? 'active open' : '') }}">
                     <a href="{{ url('tasks') }}">
                         <div class="item-content">
                             <div class="item-media">
@@ -147,19 +147,19 @@
                         </div>
                     </a>
                     <ul class="sub-menu">
-                        <li>
+                        <li class="{{ (Request::is('tasks')? 'active' : '') }}">
                             <a href="{{ url('tasks') }}">
                                 <span class="title">View All</span>
                             </a>
                         </li>
-                        <li>
+                        <li class="{{ (Request::is('tasks/add')? 'active' : '') }}">
                             <a href="{{ url('tasks/add') }}">
                                 <span class="title"> Add New </span>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li class="{{ (Request::is('leave') || Request::is('leave/apply') ? 'active open' : '') }}">
                     <a href="javascript:void(0)">
                         <div class="item-content">
                             <div class="item-media">
@@ -171,19 +171,19 @@
                         </div>
                     </a>
                     <ul class="sub-menu">
-                        <li>
+                        <li class="{{ (Request::is('leave') ? 'active open' : '') }}">
                             <a href="{{ url('leave') }}">
                                 <span class="title">View All</span>
                             </a>
                         </li>
-                        <li>
+                        <li class="{{ (Request::is('leave/apply') ? 'active' : '') }}">
                             <a href="{{ url('leave/apply') }}">
                                 <span class="title"> Apply Leave</span>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li class="{{ (Request::is('salary/transactions') || Request::is('salary/new_transaction') || Request::is('salary/increment_due') ? 'active open' : '') }}">
                     <a href="javascript:void(0)">
                         <div class="item-content">
                             <div class="item-media">
@@ -195,17 +195,17 @@
                         </div>
                     </a>
                     <ul class="sub-menu">
-                        <li>
+                        <li class="{{ (Request::is('salary/transactions') ? 'active' : '') }}">
                             <a href="{{url('salary/transactions')}}">
                                 <span class="title">Salary Transactions </span>
                             </a>
                         </li>
-                        <li>
+                        <li class="{{ (Request::is('salary/new_transaction') ? 'active' : '') }}">
                             <a href="{{url('salary/new_transaction')}}">
                                 <span class="title">New Transaction </span>
                             </a>
                         </li>
-                        <li>
+                        <li class="{{ (Request::is('salary/increment_due') ? 'active' : '') }}">
                             <a href="{{url('salary/increment_due')}}">
                                 <span class="title"> Employees Increment Due </span>
                             </a>
@@ -225,7 +225,7 @@
                         </div>
                     </a>
                     <ul class="sub-menu">
-                        <li>
+                        <li class="{{ (Request::is('settings/logo') || Request::is('settings/logo') ? 'active' : '') }}">
                             <a href="{{url('settings/logo')}}">
                                 <span class="title"> Logo </span>
                             </a>

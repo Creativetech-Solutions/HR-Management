@@ -1,13 +1,10 @@
 @extends('layout.layout')
 @section('content')
     @parent
-    <div class="container-fluid container-fullw bg-white">
-        <div class="row">
-            <div class="col-md-12">
-                <h2><?= $title; ?></h2>
-                 <hr>
 
-                <form id="form3" method="POST" action="{{url($action_url)}}" role="form" >
+    <h2><?= $title; ?></h2>
+    <hr>
+    <form id="form3" method="POST" action="{{url($action_url)}}" role="form" >
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-12">
@@ -139,12 +136,9 @@
                      </div>
                     </div>
                 </form>
-                <button class="btn btn-primary btn-wide pull-right" type="submit" id="name_id">
-                    Submit <i class="fa fa-arrow-circle-right"></i>
-                </button>
-            </div>
-        </div>
-    </div>
+    <button class="btn btn-primary btn-wide pull-right" type="submit" id="name_id">
+         Submit <i class="fa fa-arrow-circle-right"></i>
+    </button>
 @stop
 @section('script')
     @parent

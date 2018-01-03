@@ -73,15 +73,18 @@ Route::POST('/check_projects_name', ['as'=>'check_projects_name','uses'=>'Projec
 
 
 // **************** Employee *******************************
-
+//add
 Route::get('/employee/add', 'Employee\Employee@add');
 Route::post('/employee/store','Employee\Employee@store');
-// Clients  edit
+//   edit
 Route::get('/employee/edit/{id}', ['as'=>'employee.edit','uses'=>'Employee\Employee@edit']);     // use like this when url send from view
 Route::post('/employee/update/{id}','Employee\Employee@update');
-// Clients  View
+//   View
 Route::get('/employee', 'Employee\Employee@index');
 Route::get('/get-data-employee', ['as'=>'get.employee_data','uses'=>'Employee\Employee@getData']);
+// profile
+Route::get('/employee/profile/{id}', ['as'=>'employee.profile','uses'=>'Employee\Employee@profile']);
+
 
 
 //  ****************  Tasks  ********************************
@@ -144,5 +147,4 @@ Route::post('salary/increase_salary', ['as'=>'increase_salary','uses'=>'Salary\S
 Route::get('settings/logo', 'Settings\Setting@logo');
 Route::post('/settings/update/{id}','Settings\Setting@update');
 
-//jkadkas
 

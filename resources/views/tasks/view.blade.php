@@ -1,10 +1,7 @@
 @extends('layout.layout')
 @section('content')
     @parent
-    <div class="container-fluid container-fullw bg-white">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row">
+<div class="row">
                     <div class="col-md-8">
                      <h2>Tasks Listings</h2>
                     </div>
@@ -39,12 +36,7 @@
                     {{ csrf_field() }}
                     </thead>
                 </table>
-            </div>
-        </div>
-    </div>
-
-
-    </div><div id="project_status" class="modal fade" role="dialog">
+</div><div id="project_status" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

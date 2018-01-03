@@ -1,50 +1,39 @@
 @extends('layout.layout')
 @section('content')
-    @parent
-    <div class="container-fluid container-fullw bg-white">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-8">
-                     <h2>Projects Listings</h2>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="{{ url('projects/add') }}" >
-                            <span class="title btn btn-sm btn-primary pull-right"> Add New </span>
-                        </a>
-
-                    </div>
-                </div>
-                <hr>
-
-                @if(Session::has('message'))
-                <div class="alert alert-success">
-                    {{ Session::get('message')}}
-                </div>
-                @endif
-
-                <table class="table-bordered table table-striped table-bordered table-hover table-full-width" id="users-table">
-                    <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Project Name</th>
-                        <th>Client Name</th>
-                        <th>Project Manager</th>
-                        <th>Project Status</th>
-                        <th>Payment Status</th>
-                         <th>Start Date</th>
-                        <th>Due Date </th>
-                        <th>Action</th>
-                    </tr>
-                    {{ csrf_field() }}
-                    </thead>
-                </table>
-            </div>
-        </div>
+@parent
+   <div class="row">
+       <div class="col-md-8">
+          <h2>Projects Listings</h2>
+       </div>
+       <div class="col-md-4">
+           <a href="{{ url('projects/add') }}" >
+               <span class="title btn btn-sm btn-primary pull-right"> Add New </span>
+           </a>
+       </div>
+   </div>
+<hr>
+@if(Session::has('message'))
+    <div class="alert alert-success">
+        {{ Session::get('message')}}
     </div>
-
-
-    </div><div id="project_status" class="modal fade" role="dialog">
+@endif
+<table class="table-bordered table table-striped table-bordered table-hover table-full-width" id="users-table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Project Name</th>
+        <th>Client Name</th>
+        <th>Project Manager</th>
+        <th>Project Status</th>
+        <th>Payment Status</th>
+        <th>Start Date</th>
+        <th>Due Date </th>
+        <th>Action</th>
+    </tr>
+    {{ csrf_field() }}
+    </thead>
+</table>
+ </div><div id="project_status" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

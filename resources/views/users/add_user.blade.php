@@ -1,9 +1,7 @@
 @extends('layout.layout')
 @section('content')
     @parent
-    <div class="container-fluid container-fullw bg-white">
-        <div class="row">
-            <div class="col-md-12">
+
                 <h2><?= $title; ?></h2>
                  <hr>
 
@@ -130,9 +128,6 @@
                 <button class="btn btn-primary btn-wide pull-right" type="submit" id="name_id">
                     Submit <i class="fa fa-arrow-circle-right"></i>
                 </button>
-            </div>
-        </div>
-    </div>
 @stop
 @section('script')
     @parent

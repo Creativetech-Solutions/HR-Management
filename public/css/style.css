@@ -13,6 +13,20 @@ section#page-title {
     margin: 0 !important;
     top: 30% !important;
 }
+.table {
+    border-collapse: collapse;
+    width: 100% !important;
+}
+.settings > .btn {
+
+
+    left: -28px !important;
+    padding: 10px 8px !important;
+    position: absolute;
+    top: 41px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
 
 .error {
     color: #cc2828;
