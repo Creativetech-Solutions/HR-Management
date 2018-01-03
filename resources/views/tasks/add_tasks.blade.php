@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h2><?= $title; ?></h2>
-                 <hr>
+                <hr>
 
                 <form id="form3" method="POST" action="{{url($action_url)}}" role="form" enctype="multipart/form-data" accept-charset="UTF-8">
                     {{ csrf_field() }}
@@ -44,7 +44,7 @@
                                 </select>
                             </div>
 
-                           <div class="form-group">
+                            <div class="form-group">
                                 <label>
                                     Task Status
                                 </label>
@@ -90,14 +90,14 @@
                                    <?php }}?>
                                  </select>
                             </div>
-                           <div class="form-group">
+                            <div class="form-group">
                                 <label class="control-label">
                                      Assigned Date <span class=""></span>
                                 </label>
                                 <input type="text" placeholder="Task End Date" class="form-control datepicker" id="due_date" name="due_date"
                                       value="<?= !empty($projects->due_date) ? $projects->due_date : " " ?>">
-                           </div>
-                           <div class="form-group">
+                            </div>
+                            <div class="form-group">
                                 <label class="control-label">
                                     Task Due Date <span class=""></span>
                                 </label>
@@ -130,11 +130,11 @@
 
                         </div>
                     </div>
-                  </form>
-                 <button class="btn btn-primary btn-wide pull-right" type="submit" id="name_id">
+                    <button class="btn btn-primary btn-wide pull-right" type="submit" id="name_id">
                         Submit <i class="fa fa-arrow-circle-right"></i>
                     </button>
-              </div>
+                </form>
+            </div>
         </div>
     </div>
 
