@@ -1,7 +1,8 @@
 <?php
 
 Auth::routes();
-Route::get('/', 'HomeController@index')->name('');
+///Route::get('/', 'HomeController@index')->name('');
+Route::get('/', 'Users\Users@index')->name('');
 
 // **************** Clients *****************************
 
