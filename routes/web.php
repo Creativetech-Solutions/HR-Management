@@ -144,5 +144,5 @@ Route::post('salary/increase_salary', ['as'=>'increase_salary','uses'=>'Salary\S
 Route::get('settings/logo', 'Settings\Setting@logo');
 Route::post('/settings/update/{id}','Settings\Setting@update');
 
-
+//jkadkas
 

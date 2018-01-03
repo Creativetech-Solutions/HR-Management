@@ -19,7 +19,7 @@ class Setting extends Controller
     }
     //This Method is to view/display Logo
     public function logo(){
-        $data = Settings::find(1);
+        $data = Settings::all();
          return view('settings.logo',['title'=>'Update Logo','data'=>$data,'action_url'=>'settings/update/1']);
     }
     public function update( Request $request){

@@ -125,8 +125,6 @@
                                     <option value="2" <?php if(isset($projects->payment_status) && $projects->payment_status== 2 ){echo "selected";}?> > Incomplete  </option>
                                     <option value="3" <?php if(isset($projects->payment_status) && $projects->payment_status== 3 ){echo "selected";}?> > Paid        </option>
                                     <option value="4" <?php if(isset($projects->payment_status) && $projects->payment_status== 4 ){echo "selected";}?> > Cancelled   </option>
-                                    <option value="5" <?php if(isset($projects->payment_status) && $projects->payment_status== 5 ){echo "selected";}?> > Refunded    </option>
-                                    <option value="6" <?php if(isset($projects->payment_status) && $projects->payment_status== 6 ){echo "selected";}?> > Declined    </option>
                                 </select>
                             </div>
                             <div class="form-group">

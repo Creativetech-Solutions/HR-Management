@@ -55,10 +55,6 @@ class Projects extends Controller
                      return '<span class="project_pay_status btn btn-xs btn-success"  data-id="'.$projects->id.'" data-title="'.$projects->pro_name.'"data-status="'.$projects->payment_status.'">Paid</span>';
                 }else if($projects->payment_status == 4) {
                      return '<span class="project_pay_status btn btn-xs btn-orange"  data-id="'.$projects->id.'" data-title="'.$projects->pro_name.'" data-status="'.$projects->payment_status.'">Cancelled</span>';
-                }else if($projects->payment_status == 5) {
-                     return '<span class="project_pay_status btn btn-xs btn-danger"  data-id="'.$projects->id.'" data-title="'.$projects->pro_name.'" data-status="'.$projects->payment_status.'">Refunded</span>';
-                }else if($projects->payment_status == 6) {
-                     return '<span class="project_pay_status btn btn-xs btn-danger"  data-id="'.$projects->id.'" data-title="'.$projects->pro_name.'" data-status="'.$projects->payment_status.'">Declined</span>';
                 }
             })
             ->rawColumns(array("action","project_status","payment_status"))//rawColumns used for multiple column

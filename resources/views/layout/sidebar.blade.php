@@ -3,7 +3,7 @@
     <div class="sidebar-container perfect-scrollbar">
         <nav>
             <ul class="main-navigation-menu">
-                <li class="active open">
+                <li class="">
                     <a href="index.html">
                         <div class="item-content">
                             <div class="item-media">
@@ -213,7 +213,7 @@
                     </ul>
                 </li>
 
-                <li>
+                <li class="{{ (Request::is('settings/logo') ? 'active open' : '') }}">
                     <a href="javascript:void(0)">
                         <div class="item-content">
                             <div class="item-media">
@@ -226,7 +226,7 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="ui_elements.html">
+                            <a href="{{url('settings/logo')}}">
                                 <span class="title"> Logo </span>
                             </a>
                         </li>
