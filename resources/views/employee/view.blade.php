@@ -1,20 +1,17 @@
 @extends('layout.layout')
 @section('content')
     @parent
-    <div class="container-fluid container-fullw bg-white">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-8">
+    <div class="row">
+           <div class="col-md-8">
                      <h2>Employee Listings</h2>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="{{ url('employee/add') }}" >
-                            <span class="title btn btn-sm btn-primary pull-right"> Add New </span>
-                        </a>
+           </div>
+           <div class="col-md-4">
+                  <a href="{{ url('employee/add') }}" >
+                      <span class="title btn btn-sm btn-primary pull-right"> Add New </span>
+                  </a>
 
-                    </div>
-                </div>
+           </div>
+    </div>
                 <hr>
 
                 @if(Session::has('message'))
@@ -38,9 +35,6 @@
                     {{ csrf_field() }}
                     </thead>
                 </table>
-            </div>
-        </div>
-    </div>
 @stop
 @section('script')
 @parent

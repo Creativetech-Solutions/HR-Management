@@ -1,10 +1,7 @@
 @extends('layout.layout')
 @section('content')
     @parent
-    <div class="container-fluid container-fullw bg-white">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row">
+     <div class="row">
                     <div class="col-md-8">
                      <h2>Leaves Listings</h2>
                     </div>
@@ -15,14 +12,11 @@
 
                     </div>
                 </div>
-                <hr>
-
-                @if(Session::has('message'))
-                <div class="alert alert-success">
+    <hr>
+    @if(Session::has('message'))<div class="alert alert-success">
                     {{ Session::get('message')}}
-                </div>
-                @endif
-                <table class="table-bordered table table-striped table-bordered table-hover table-full-width" id="users-table">
+                </div>@endif
+    <table class="table-bordered table table-striped table-bordered table-hover table-full-width" id="users-table">
                     <thead>
                     <tr>
                         <th>Id</th>
@@ -36,9 +30,6 @@
                     {{ csrf_field() }}
                     </thead>
                 </table>
-            </div>
-        </div>
-    </div>
 @stop
 @section('script')
 @parent

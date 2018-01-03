@@ -1,9 +1,7 @@
 @extends('layout.layout')
 @section('content')
     @parent
-    <div class="container-fluid container-fullw bg-white">
-        <div class="row">
-            <div class="col-md-12">
+
                 <div class="row">
                     <div class="col-md-8">
                      <h2>Users Listings</h2>
@@ -37,9 +35,7 @@
                     {{ csrf_field() }}
                     </thead>
                 </table>
-            </div>
-        </div>
-    </div>
+
 @stop
 @section('script')
 @parent

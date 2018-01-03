@@ -1,10 +1,7 @@
 @extends('layout.layout')
 @section('content')
-    @parent
-    <div class="container-fluid container-fullw bg-white">
-        <div class="row">
-            <div class="col-md-12">
-                <h2><?= $title; ?></h2>
+@parent
+<h2><?= $title; ?></h2>
                 <hr>
                 @if(Session::has('message'))
                     <div class="alert alert-success">
@@ -28,14 +25,16 @@
                        <div class="col-md-12">
                            <div class="form-group">
                                <label>
-                                   Image Uploaded
-                               </label>
-                               <?= print_r($data);
 
-                              // echo $data->logo;
-                               exit;?>
+                               </label>
+
+                               <?php
+                               foreach($data as $data){
+                                      $logo = $data->logo;
+                               }
+                               ?>
                                <div class="fileinput fileinput-new" data-provides="fileinput">
-                                   <div class="fileinput-new thumbnail"><img src="{{URL::asset('/images/logo/'.$data->logo)}}" alt="">
+                                   <div class="fileinput-new thumbnail"><img src="{{URL::asset('/assets/images/logo/'.$logo)}}" alt="">
                                    </div>
                                    <div class="fileinput-preview fileinput-exists thumbnail"></div>
                                    <div class="user-edit-image-buttons">
@@ -55,11 +54,6 @@
                 <button class="btn btn-primary btn-wide pull-right" type="submit" id="name_id">
                     Submit <i class="fa fa-arrow-circle-right"></i>
                 </button>
-            </div>
-        </div>
-    </div>
-
-
 @stop
 @section('script')
     @parent

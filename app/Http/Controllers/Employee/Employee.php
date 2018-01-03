@@ -31,7 +31,8 @@ class Employee extends Controller
         $data = Datatables::of($employee)
             ->escapeColumns()
             ->addColumn('action', function ($employee) {
-                return '<a href="' . route("employee.edit", $employee->id) . '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                return '<a href="' . route("employee.profile", $employee->id) . '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> View</a>
+                 <a href="' . route("employee.edit", $employee->id) . '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>
                   <button class="delete-modal btn btn-xs btn-danger" data-id="'.$employee->id.'" data-title="'.$employee->name.'" data-content="'.$employee->email.'">
                   <span class="glyphicon glyphicon-trash"></span> Delete</button>';})
             ->addColumn('status',function($employee){
@@ -96,7 +97,7 @@ class Employee extends Controller
         $user       = User::find($id);
         $dev_data   = User::find($id)->developer()->first();  // call function in user class clients
         $dev_data   = $dev_data ?  $dev_data : " " ;
-        return view('employee.Add_employee', [
+        return view('employee.add_employee', [
             'dev_data'   =>  $dev_data,
             'user'       =>  $user,
             'title'      =>  $title,
@@ -117,7 +118,6 @@ class Employee extends Controller
         $User->gender        = $request->gender;
         $User->password      = bcrypt($request->password);
         $User->save();
-
         $developer           = User::find($id)->developer()->first();
         $developer->salary          = $request->salary;
         $developer->total_leaves    = $request->total_leaves;
@@ -126,5 +126,22 @@ class Employee extends Controller
         $developer->required_skills = $request->required_skills ? implode(',',$request->required_skills):" ";
         $developer->save();
         return redirect('employee')->with('message', 'Employee updated successfully!');
+    }
+    public function profile($id){
+        $title      = 'User Profile';
+        $action_url = 'employee/update/'.$id;
+        $countries  = Countries::all();
+        $skills     = DB::table('skills')->get();
+        $user       = User::find($id);
+        $dev_data   = User::find($id)->developer()->first();  // call function in user class clients
+        $dev_data   = $dev_data ?  $dev_data : " " ;
+        return view('employee.profile', [
+            'dev_data'   =>  $dev_data,
+            'user'       =>  $user,
+            'title'      =>  $title,
+            'action_url' =>  $action_url,
+            'skills'     =>  $skills,
+            'countries'  =>  $countries
+        ]);
     }
 }

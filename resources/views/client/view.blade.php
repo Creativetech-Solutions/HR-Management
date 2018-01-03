@@ -1,10 +1,8 @@
 @extends('layout.layout')
 @section('content')
-    @parent
-    <div class="container-fluid container-fullw bg-white">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row">
+@parent
+
+    <div class="row">
                     <div class="col-md-8">
                      <h2>Clients Listings</h2>
                     </div>
@@ -15,32 +13,26 @@
 
                     </div>
                 </div>
-                <hr>
-
-                @if(Session::has('message'))
-                <div class="alert alert-success">
+    <hr>
+    @if(Session::has('message'))<div class="alert alert-success">
                     {{ Session::get('message')}}
                 </div>
-                @endif
-
-                <table class="table-bordered table table-striped table-bordered table-hover table-full-width" id="users-table">
-                    <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Skills</th>
-                        <th>PlatForm</th>
-                        <th>Country</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                    {{ csrf_field() }}
-                    </thead>
-                </table>
-            </div>
-        </div>
-    </div>
+    @endif
+    <table class="table-bordered table table-striped table-bordered table-hover table-full-width" id="users-table">
+       <thead>
+          <tr>
+             <th>Id</th>
+             <th>Name</th>
+              <th>Email</th>
+              <th>Skills</th>
+              <th>PlatForm</th>
+              <th>Country</th>
+              <th>Status</th>
+              <th>Action</th>
+          </tr>
+          {{ csrf_field() }}
+       </thead>
+    </table>
 @stop
 @section('script')
 @parent
@@ -59,10 +51,8 @@
                 { data: 'country', name: 'country' },
                 { data: 'status', name: 'status' },
                 {data: 'action', name: 'action'}
-
              ]
         });
-
         $(document).on('click', '.delete-modal', function() {
             $('.modal-title').text('Delete');
             $('.heading_text').text('Are you sure you want to Delete the following Client?');
