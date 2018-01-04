@@ -169,7 +169,7 @@
                             <div class="col-sm-3">
                                 <button class="btn btn-icon margin-bottom-5 margin-bottom-5 btn-block">
                                     <i class="ti-layers-alt block text-primary text-extra-large margin-bottom-10"></i>
-                                    Projects <span class="badge badge-success"> 23 </span>
+                                    Projects <span class="badge badge-success" id="p_t"> </span>
                                 </button>
                             </div>
                             <div class="col-sm-3">
@@ -357,26 +357,12 @@
                     { data: 'project_status', name: 'project_status' },
                     { data: 'payment_status', name: 'payment_status' },
                 ]
-            });
-            //var rowCount =  $('#projects').length;
-//            var rowCount = $('table#projects tr').length;
-//            console.log(rowCount);
 
-//            function CountRows() {
-//                var totalRowCount = 0;
-//                var rowCount = 0;
-//                var table = document.getElementById("#projects");
-//                var rows = table.getElementsByTagName("tr")
-//                for (var i = 0; i < rows.length; i++) {
-//                    totalRowCount++;
-//                    if (rows[i].getElementsByTagName("td").length > 0) {
-//                        rowCount++;
-//                    }
-//                }
-//                var message = "Total Row Count: " + totalRowCount;
-//                message += "\nRow Count: " + rowCount;
-//                alert(message);
-//            }
-  });
+            });
+        });
+        $(document).ready(function(){
+           var tp = $('#projects > tr').size();
+            $('#p_t').text(tp);
+        });
     </script>
 @stop
