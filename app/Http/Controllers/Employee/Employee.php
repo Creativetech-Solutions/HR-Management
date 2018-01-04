@@ -71,6 +71,7 @@ class Employee extends Controller
             'city'         => $request->city,
             'country'      => $request->country,
             'zipcode'      => $request->zipcode,
+            'phone'        => $request->phone,
             'status'       => '0',
             'active'       => '0',
             'user_type'    => 'Developer',
@@ -116,6 +117,7 @@ class Employee extends Controller
         $User->country       = $request->country;
         $User->zipcode       = $request->zipcode;
         $User->gender        = $request->gender;
+        $User->phone         = $request->phone;
         $User->password      = bcrypt($request->password);
         $User->save();
         $developer           = User::find($id)->developer()->first();
@@ -129,19 +131,23 @@ class Employee extends Controller
     }
     public function profile($id){
         $title      = 'User Profile';
-        $action_url = 'employee/update/'.$id;
-        $countries  = Countries::all();
-        $skills     = DB::table('skills')->get();
         $user       = User::find($id);
-        $dev_data   = User::find($id)->developer()->first();  // call function in user class clients
+        $dev_data   = User::find($id)->developer()->first();  // call function in user class Developers
+        $dev_pro    = User::find($id)->get_projects()->orderBy('id', 'desc')->first();  // call function in user class Developers
         $dev_data   = $dev_data ?  $dev_data : " " ;
+        $dev_pro    = $dev_pro  ?  $dev_pro  : " " ;
+        if(!empty($dev_data->required_skills)){
+            $skills     = explode(',',$dev_data->required_skills);
+            $skills     = DB::table('skills')->whereIn('id',$skills)->get();
+        }else{
+            $skills = "";
+        }
         return view('employee.profile', [
-            'dev_data'   =>  $dev_data,
+            'dev'        =>  $dev_data,
             'user'       =>  $user,
             'title'      =>  $title,
-            'action_url' =>  $action_url,
             'skills'     =>  $skills,
-            'countries'  =>  $countries
+            'dev_pro'    =>  $dev_pro,
         ]);
     }
 }

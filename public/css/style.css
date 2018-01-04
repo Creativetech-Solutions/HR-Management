@@ -17,6 +17,9 @@ section#page-title {
     border-collapse: collapse;
     width: 100% !important;
 }
+span.p_skills.btn.btn-xs.btn-primary {
+    margin: 2px;
+}
 .settings > .btn {
 
 

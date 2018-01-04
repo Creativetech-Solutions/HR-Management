@@ -148,10 +148,10 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label">
-                                    Total leaves <span class=""></span>
+                                    Phone <span class=""></span>
                                 </label>
-                                <input type="text" placeholder="Total leaves" class="form-control" id="total_leaves" name="total_leaves"
-                                       value="<?= !empty($dev_data->total_leaves) ? $dev_data->total_leaves : " " ?>">
+                                <input type="text" placeholder="Phone No" class="form-control" id="phone" name="phone"
+                                       value="<?= !empty($user->phone) ? $user->phone : " " ?>">
                             </div>
 
 

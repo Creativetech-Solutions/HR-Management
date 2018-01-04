@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Client;
 use App\model\Clients;
+use App\model\Project;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DataTables;
@@ -33,7 +34,9 @@ class Client extends Controller
             $data = Datatables::of($clients)
             ->escapeColumns()
             ->addColumn('action', function ($clients) {
-                 return '<a href="' . route("clients.edit", $clients->id) . '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                 return '<a href="' . route("client.profile", $clients->id) . '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-open-eye"></i> View </a>
+                         <a href="' . route("clients.edit", $clients->id) . '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                         
                   <button class="delete-modal btn btn-xs btn-danger" data-id="'.$clients->id.'" data-title="'.$clients->name.'" data-content="'.$clients->email.'">
                   <span class="glyphicon glyphicon-trash"></span> Delete</button>';})
             ->addColumn('status',function($clients){
@@ -117,5 +120,28 @@ class Client extends Controller
         $clients->required_skills= $request->required_skills ? implode(',',$request->required_skills):" ";
         $clients->save();
         return redirect('clients')->with('message', 'Client updated successfully!');
+    }
+    public function profile($id){
+        $title      = 'User Profile';
+        $user       = User::find($id);
+        $dev_data   = User::find($id)->clients()->first();  // call function in user class Developers
+        $ids        = $dev_data->id;
+        $dev_pro    = Project::get()->where('client_id',"=",$ids)->last();  // call function in user class Developers
+        $dev_data   = $dev_data ?  $dev_data : " " ;
+        $dev_pro    = $dev_pro  ?  $dev_pro  : " " ;
+        if(!empty($dev_data->required_skills)){
+            $skills     = explode(',',$dev_data->required_skills);
+            $skills     = DB::table('skills')->whereIn('id',$skills)->get();
+        }else{
+            $skills = "";
+        }
+
+        return view('client.profile', [
+            'dev'        =>  $dev_data,
+            'user'       =>  $user,
+            'title'      =>  $title,
+            'skills'     =>  $skills,
+            'dev_pro'    =>  $dev_pro,
+        ]);
     }
 }

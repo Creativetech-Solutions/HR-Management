@@ -61,6 +61,84 @@ class Projects extends Controller
             ->make(true);
         return $data;
     }
+    public function getData_me($id) // get data form Projects fro Developer profile
+    {
+        $projects = DB::table('users as us')
+            ->leftjoin('clients as cl','cl.user_id','=','us.id')
+            ->rightjoin('projects as pro','pro.client_id','=','cl.id')
+            ->leftjoin('users as em','em.id','=','pro.project_manager')
+            ->where('em.id','=',$id)
+            ->select('pro.id','pro.name as pro_name','us.name as client_name','pro.project_status','pro.start_date','pro.due_date','em.name as emp_name','pro.payment_status as payment_status');
+            $data = Datatables::of($projects)
+            ->escapeColumns()
+            ->addColumn('action', function ($projects) {
+                return '<a href="' . route("projects.edit", $projects->id) . '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                  <button class="delete-modal btn btn-xs btn-danger" data-id="'.$projects->id.'" data-title="'.$projects->pro_name.'" data-content="">
+                  <span class="glyphicon glyphicon-trash"></span> Delete</button>';})
+            ->addColumn('project_status',function($projects){
+                if($projects->project_status == 1){
+                    return '<span class="project_status btn btn-xs btn-light-azure" data-id="'.$projects->id.'" data-title="'.$projects->pro_name.'" data-status="'.$projects->project_status.'">Active</span>';
+                }else if($projects->project_status == 2) {
+                     return '<span class="project_status btn btn-xs btn-dark-blue"  data-id="'.$projects->id.'" data-title="'.$projects->pro_name.'" data-status="'.$projects->project_status.'">OnHold</span>';
+                }else if($projects->project_status == 3) {
+                     return '<span class="project_status btn btn-xs btn-success"  data-id="'.$projects->id.'" data-title="'.$projects->pro_name.'" data-status="'.$projects->project_status.'">Completed</span>';
+                }else if($projects->project_status == 4) {
+                     return '<span class="project_status btn btn-xs  btn-dark-red"  data-id="'.$projects->id.'" data-title="'.$projects->pro_name.'"  data-status="'.$projects->project_status.'">Drop</span>';
+                }
+            })->addColumn('payment_status',function($projects){
+                if($projects->payment_status == 1){
+                    return '<span class="project_pay_status btn btn-xs btn-dark-red" data-id="'.$projects->id.'" data-title="'.$projects->pro_name.'" data-status="'.$projects->payment_status.'">Pending</span>';
+                }else if($projects->payment_status == 2) {
+                     return '<span class="project_pay_status btn btn-xs btn-dark-blue"  data-id="'.$projects->id.'" data-title="'.$projects->pro_name.'" data-status="'.$projects->payment_status.'">InComplete</span>';
+                }else if($projects->payment_status == 3) {
+                     return '<span class="project_pay_status btn btn-xs btn-success"  data-id="'.$projects->id.'" data-title="'.$projects->pro_name.'"data-status="'.$projects->payment_status.'">Paid</span>';
+                }else if($projects->payment_status == 4) {
+                     return '<span class="project_pay_status btn btn-xs btn-orange"  data-id="'.$projects->id.'" data-title="'.$projects->pro_name.'" data-status="'.$projects->payment_status.'">Cancelled</span>';
+                }
+            })
+            ->rawColumns(array("action","project_status","payment_status"))//rawColumns used for multiple column
+            ->make(true);
+        return $data;
+    }
+    public function getData_for_cl($id) // get data form Projects fro Client profile
+    {
+        $projects = DB::table('users as us')
+            ->leftjoin('clients as cl','cl.user_id','=','us.id')
+            ->rightjoin('projects as pro','pro.client_id','=','cl.id')
+            ->leftjoin('users as em','em.id','=','pro.project_manager')
+            ->where('cl.id','=',$id)
+            ->select('pro.id','pro.name as pro_name','us.name as client_name','pro.project_status','pro.start_date','pro.due_date','em.name as emp_name','pro.payment_status as payment_status');
+            $data = Datatables::of($projects)
+            ->escapeColumns()
+            ->addColumn('action', function ($projects) {
+                return '<a href="' . route("projects.edit", $projects->id) . '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                  <button class="delete-modal btn btn-xs btn-danger" data-id="'.$projects->id.'" data-title="'.$projects->pro_name.'" data-content="">
+                  <span class="glyphicon glyphicon-trash"></span> Delete</button>';})
+            ->addColumn('project_status',function($projects){
+                if($projects->project_status == 1){
+                    return '<span class="project_status btn btn-xs btn-light-azure" data-id="'.$projects->id.'" data-title="'.$projects->pro_name.'" data-status="'.$projects->project_status.'">Active</span>';
+                }else if($projects->project_status == 2) {
+                     return '<span class="project_status btn btn-xs btn-dark-blue"  data-id="'.$projects->id.'" data-title="'.$projects->pro_name.'" data-status="'.$projects->project_status.'">OnHold</span>';
+                }else if($projects->project_status == 3) {
+                     return '<span class="project_status btn btn-xs btn-success"  data-id="'.$projects->id.'" data-title="'.$projects->pro_name.'" data-status="'.$projects->project_status.'">Completed</span>';
+                }else if($projects->project_status == 4) {
+                     return '<span class="project_status btn btn-xs  btn-dark-red"  data-id="'.$projects->id.'" data-title="'.$projects->pro_name.'"  data-status="'.$projects->project_status.'">Drop</span>';
+                }
+            })->addColumn('payment_status',function($projects){
+                if($projects->payment_status == 1){
+                    return '<span class="project_pay_status btn btn-xs btn-dark-red" data-id="'.$projects->id.'" data-title="'.$projects->pro_name.'" data-status="'.$projects->payment_status.'">Pending</span>';
+                }else if($projects->payment_status == 2) {
+                     return '<span class="project_pay_status btn btn-xs btn-dark-blue"  data-id="'.$projects->id.'" data-title="'.$projects->pro_name.'" data-status="'.$projects->payment_status.'">InComplete</span>';
+                }else if($projects->payment_status == 3) {
+                     return '<span class="project_pay_status btn btn-xs btn-success"  data-id="'.$projects->id.'" data-title="'.$projects->pro_name.'"data-status="'.$projects->payment_status.'">Paid</span>';
+                }else if($projects->payment_status == 4) {
+                     return '<span class="project_pay_status btn btn-xs btn-orange"  data-id="'.$projects->id.'" data-title="'.$projects->pro_name.'" data-status="'.$projects->payment_status.'">Cancelled</span>';
+                }
+            })
+            ->rawColumns(array("action","project_status","payment_status"))//rawColumns used for multiple column
+            ->make(true);
+        return $data;
+    }
     public function add()
     {
         $title      = 'Add Project';

@@ -19,6 +19,7 @@ class AddUsersColumsToUsersTable extends Migration
             $table->string('city')->nullable();
             $table->string('country')->nullable();
             $table->string('zipcode')->nullable();
+            $table->string('phone')->nullable();
             $table->longText('address')->nullable();
             $table->string('user_type')->nullable();
             $table->integer('status')->nullable();

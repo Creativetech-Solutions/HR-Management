@@ -15,6 +15,8 @@ Route::post('/clients/update/{id}','Client\Client@update');
 // Clients  View
 Route::get('/clients', 'Client\Client@index');
 Route::get('/get-data-clients', ['as'=>'get.data','uses'=>'Client\Client@getData']);
+// profile
+Route::get('/client/profile/{id}', ['as'=>'client.profile','uses'=>'Client\Client@profile']);
 
 // **************** User , Client And Employee *****************************
 
@@ -65,6 +67,9 @@ Route::post('/projects/update/{id}','Projects\Projects@update');
 //   View
 Route::get('/projects', 'Projects\Projects@index');
 Route::get('/get-data-projects', ['as'=>'get.projects_data','uses'=>'Projects\Projects@getData']);
+//get data for single employee and client
+Route::get('/get-data-getData_me/{id}', ['as'=>'get.projects_data_me','uses'=>'Projects\Projects@getData_me']);
+Route::get('/get-data-getData_for_cl/{id}', ['as'=>'get.getData_for_cl','uses'=>'Projects\Projects@getData_for_cl']);
 //   delete
 Route::delete('/projects_delete/{id}', ['as'=>'projects_delete','uses'=>'Projects\Projects@destroy']);
 //   Change Status
