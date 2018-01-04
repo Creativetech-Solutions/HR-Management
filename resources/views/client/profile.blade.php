@@ -10,7 +10,7 @@
                 </a>
             </li>
             <li>
-                <a  href="{{ route("employee.edit", $user->id ) }}">
+                <a  href="{{ route("clients.edit", $user->id ) }}">
                     Edit Account
                 </a>
             </li>
@@ -112,28 +112,13 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>Join Date</td>
-                                    <td>{{ $dev->join_date }}</td>
-                                    <td><a href="#panel_edit_account" class="show-tab"></a></td>
-                                </tr>
-                                <tr>
-                                    <td>Last Increment</td>
-                                    <td>{{ $dev->last_increment }}</td>
-                                    <td><a href="#panel_edit_account" class="show-tab"></a></td>
-                                </tr>
-                                <tr>
-                                    <td>Salary</td>
-                                    <td>{{ $dev->salary }}</td>
-                                    <td><a href="#panel_edit_account" class="show-tab"></a></td>
-                                </tr>
-                                <tr>
                                     <td>Status</td>
                                     <td>
                                         <?= $user->status == 1 ? '<span class="btn btn-xs btn-success">Publish</span>' : "<span class='btn btn-xs btn-danger'>Pending</span>" ?>
                                     </td>
                                     <td><a href="#panel_edit_account" class="show-tab"></a></td>
                                 </tr>
-                                 </tbody>
+                                </tbody>
                             </table>
                             <table class="table">
                                 <thead>
@@ -151,12 +136,12 @@
                                     <td>Skills</td>
                                     <td><?php
 
-                                            if(!empty($skills)){
-                                                foreach($skills as $skill)
-                                                {
-                                                    ?><span class="p_skills btn btn-xs btn-primary"> {{ $skill->skill_name }}</span><?php
-                                                }
-                                            }?>
+                                        if(!empty($skills)){
+                                        foreach($skills as $skill)
+                                        {
+                                        ?><span class="p_skills btn btn-xs btn-primary"> {{ $skill->skill_name }}</span><?php
+                                        }
+                                        }?>
                                     </td>
                                     <td><a href="#panel_edit_account" class="show-tab"></a></td>
                                 </tr>
@@ -187,7 +172,7 @@
                             <div class="col-sm-3 ">
                                 <button class="btn btn-icon margin-bottom-5 btn-block">
                                     <i class="fa fa-edit block text-primary text-extra-large margin-bottom-10"></i>
-                                    <a href="{{ route('employee.edit',$user->id) }}"> Edit Profile </a>
+                                    <a href="{{ route('clients.edit',$user->id) }}"> Edit Profile </a>
                                 </button>
                             </div>
                         </div>
@@ -307,7 +292,7 @@
                                     <li class=" ">
                                         <p class="ltwt_tweet_text">
                                             <a href class="text-info">
-                                               {{ $dev_pro->name }}
+                                                {{ $dev_pro->name }}
                                             </a>
                                         </p>
                                         <span class="block text-light"><i class="fa fa-fw fa-clock-o"></i> Start Date: {{ $dev_pro->start_date }}</span>
@@ -330,14 +315,14 @@
                         <th>Due Date </th>
                         <th>Project Status</th>
                         <th>Payment Status</th>
-                     </tr>
+                    </tr>
                     {{ csrf_field() }}
                     </thead>
                 </table>
             </div>
         </div>
     </div>
-    <?php $u_id = $user->id;?>
+    <?php $ids = $dev->id ?>
 @stop
 @section('script')
     @parent
@@ -346,7 +331,7 @@
             var oTable = $('#projects').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{!! route('get.projects_data_me',$u_id) !!}',
+                ajax: '{!! route('get.getData_for_cl',$ids ) !!}',
                 columns: [
                     { data: 'id', name: 'id' },
                     { data: 'pro_name', name: 'pro_name' },
@@ -358,25 +343,6 @@
                     { data: 'payment_status', name: 'payment_status' },
                 ]
             });
-            //var rowCount =  $('#projects').length;
-//            var rowCount = $('table#projects tr').length;
-//            console.log(rowCount);
-
-//            function CountRows() {
-//                var totalRowCount = 0;
-//                var rowCount = 0;
-//                var table = document.getElementById("#projects");
-//                var rows = table.getElementsByTagName("tr")
-//                for (var i = 0; i < rows.length; i++) {
-//                    totalRowCount++;
-//                    if (rows[i].getElementsByTagName("td").length > 0) {
-//                        rowCount++;
-//                    }
-//                }
-//                var message = "Total Row Count: " + totalRowCount;
-//                message += "\nRow Count: " + rowCount;
-//                alert(message);
-//            }
-  });
+        });
     </script>
 @stop
