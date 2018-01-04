@@ -154,13 +154,13 @@
                             <div class="col-sm-3">
                                 <button class="btn btn-icon margin-bottom-5 margin-bottom-5 btn-block">
                                     <i class="ti-layers-alt block text-primary text-extra-large margin-bottom-10"></i>
-                                    Projects <span class="badge badge-success"> 23 </span>
+                                    Projects <span class="badge badge-success" id="p_t" >  </span>
                                 </button>
                             </div>
                             <div class="col-sm-3">
                                 <button class="btn btn-icon margin-bottom-5 btn-block">
                                     <i class="ti-comments block text-primary text-extra-large margin-bottom-10"></i>
-                                    Tasks <span class="badge badge-success"> 23 </span>
+                                    Tasks <span class="badge badge-success" > 23 </span>
                                 </button>
                             </div>
                             <div class="col-sm-3 hide">
@@ -343,6 +343,10 @@
                     { data: 'payment_status', name: 'payment_status' },
                 ]
             });
+        });
+        $(document).ready(function(){
+            var tp = $('#projects > tr').size();
+             $('#p_t').text(tp);
         });
     </script>
 @stop
