@@ -20,8 +20,7 @@ class Client extends Controller
     {
         $this->middleware('auth');
     }
-
-    //Need to work on the client dashboard 123456
+   //Need to work on the client dashboard 123456
     public function index()
     {
         return view('client.view');
@@ -34,9 +33,8 @@ class Client extends Controller
             $data = Datatables::of($clients)
             ->escapeColumns()
             ->addColumn('action', function ($clients) {
-                 return '<a href="' . route("client.profile", $clients->id) . '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-open-eye"></i> View </a>
+                 return '<a href="' . route("client.profile", $clients->id) . '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> View </a>
                          <a href="' . route("clients.edit", $clients->id) . '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>
-                         
                   <button class="delete-modal btn btn-xs btn-danger" data-id="'.$clients->id.'" data-title="'.$clients->name.'" data-content="'.$clients->email.'">
                   <span class="glyphicon glyphicon-trash"></span> Delete</button>';})
             ->addColumn('status',function($clients){

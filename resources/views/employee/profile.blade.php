@@ -9,7 +9,7 @@
                     Overview
                 </a>
             </li>
-            <li>
+            <li class="hide">
                 <a  href="{{ route("employee.edit", $user->id ) }}">
                     Edit Account
                 </a>
@@ -42,6 +42,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <hr>
                                 <div class="social-icons block">
                                     <ul>
@@ -364,5 +365,25 @@
            var tp = $('#projects > tr').size();
             $('#p_t').text(tp);
         });
+
+        $(document).on('click','#update',function(){
+
+
+            var id ='{!! $u_id !!}';
+            var names = $('#logo')[0].files[0];
+            $.ajax({
+                url: '{!! route('users.update_user_image') !!}',
+                data: {
+                      'ids':id,
+                    'names':names,
+                    '_token': $('input[name=_token]').val()},
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                success:function(response) {
+                    alert(response);
+                }
+            });
+        })
     </script>
 @stop
