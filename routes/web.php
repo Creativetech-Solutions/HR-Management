@@ -26,6 +26,8 @@ Route::POST('/check_email', ['as'=>'check_email','uses'=>'Users\Users@check_emai
 Route::delete('/users_delete/{id}', ['as'=>'users_delete','uses'=>'Users\Users@destroy']);
 // Change user Status
 Route::post('/change_user_status/', ['as'=>'change_user_status','uses'=>'Users\Users@change_status']);
+// update profile image
+Route::post('/update_user_image', ['as'=>'users.update_user_image','uses'=>'Users\Users@update_user_image']);
 
 // **************** Users *****************************
 

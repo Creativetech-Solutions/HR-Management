@@ -9,7 +9,7 @@
                     Overview
                 </a>
             </li>
-            <li>
+            <li class="hide">
                 <a  href="{{ route("clients.edit", $user->id ) }}">
                     Edit Account
                 </a>
