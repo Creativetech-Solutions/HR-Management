@@ -225,15 +225,15 @@ class Projects extends Controller
         }
     }
     public function change_status(Request $request){
-    $id              = $request->input('id');
-    $status          = $request->input('status');
-    $is_updated      = Project::find($id)->update(array('project_status' => $status));
-    if($is_updated){
-        return response()->json($is_updated);
-    }else{
-        return response()->json($is_updated);
+        $id              = $request->input('id');
+        $status          = $request->input('status');
+        $is_updated      = Project::find($id)->update(array('project_status' => $status));
+        if($is_updated){
+            return response()->json($is_updated);
+        }else{
+            return response()->json($is_updated);
+        }
     }
-}
     public function change_payment_status(Request $request){
         $id             = $request->input('id');
         $status         = $request->input('status');

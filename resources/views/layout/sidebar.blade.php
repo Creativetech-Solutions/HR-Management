@@ -135,6 +135,30 @@
                         </li>
                     </ul>
                 </li>
+                <li class="{{ (Request::is('milestones') || Request::is('milestones/add') ? 'active open' : '') }}">
+                    <a href="{{ url('milestones') }}">
+                        <div class="item-content">
+                            <div class="item-media">
+                                <i class="ti-menu-alt"></i>
+                            </div>
+                            <div class="item-inner">
+                                <span class="title"> Milestones </span><i class="icon-arrow"></i>
+                            </div>
+                        </div>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="{{ (Request::is('milestones')  ? 'active' : '') }}">
+                            <a href="{{ url('milestones') }}">
+                                <span class="title">All Milestones</span>
+                            </a>
+                        </li>
+                        <li class="{{ (Request::is('milestones/add')  ? 'active' : '') }}">
+                            <a href="{{ url('milestones/add') }}">
+                                <span class="title"> Add New </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="{{ (Request::is('tasks') || Request::is('tasks/add') ? 'active open' : '') }}">
                     <a href="{{ url('tasks') }}">
                         <div class="item-content">
