@@ -9,7 +9,7 @@
                     Overview
                 </a>
             </li>
-            <li>
+            <li class="hide">
                 <a  href="{{ route("employee.edit", $user->id ) }}">
                     Edit Account
                 </a>
@@ -42,6 +42,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <hr>
                                 <div class="social-icons block">
                                     <ul>
@@ -169,7 +170,7 @@
                             <div class="col-sm-3">
                                 <button class="btn btn-icon margin-bottom-5 margin-bottom-5 btn-block">
                                     <i class="ti-layers-alt block text-primary text-extra-large margin-bottom-10"></i>
-                                    Projects <span class="badge badge-success"> 23 </span>
+                                    Projects <span class="badge badge-success" id="p_t"> </span>
                                 </button>
                             </div>
                             <div class="col-sm-3">
@@ -357,26 +358,32 @@
                     { data: 'project_status', name: 'project_status' },
                     { data: 'payment_status', name: 'payment_status' },
                 ]
-            });
-            //var rowCount =  $('#projects').length;
-//            var rowCount = $('table#projects tr').length;
-//            console.log(rowCount);
 
-//            function CountRows() {
-//                var totalRowCount = 0;
-//                var rowCount = 0;
-//                var table = document.getElementById("#projects");
-//                var rows = table.getElementsByTagName("tr")
-//                for (var i = 0; i < rows.length; i++) {
-//                    totalRowCount++;
-//                    if (rows[i].getElementsByTagName("td").length > 0) {
-//                        rowCount++;
-//                    }
-//                }
-//                var message = "Total Row Count: " + totalRowCount;
-//                message += "\nRow Count: " + rowCount;
-//                alert(message);
-//            }
-  });
+            });
+        });
+        $(document).ready(function(){
+           var tp = $('#projects > tr').size();
+            $('#p_t').text(tp);
+        });
+
+        $(document).on('click','#update',function(){
+
+
+            var id ='{!! $u_id !!}';
+            var names = $('#logo')[0].files[0];
+            $.ajax({
+                url: '{!! route('users.update_user_image') !!}',
+                data: {
+                      'ids':id,
+                    'names':names,
+                    '_token': $('input[name=_token]').val()},
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                success:function(response) {
+                    alert(response);
+                }
+            });
+        })
     </script>
 @stop

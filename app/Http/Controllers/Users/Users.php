@@ -134,5 +134,27 @@ class Users extends Controller
         $data  = $User->delete();
         return response()->json($data);
     }
+    public function update_user_image( Request $request){
+
+         $id   = $request->input('ids');
+
+        if($request->hasFile('names')) {
+            $file = $request->file('names');
+            $name = 'logo'.'.'.$file->getClientOriginalExtension();
+            $image['filePath'] = $name;
+            $file->move('assets/images/logo', $name);
+        }else{
+            $name ="sdf ";
+        }
+        $name = $request->input('names');
+        $data   = User::find($id)->update(array('logo'=>$name));
+        if($data){
+            return response()->json(array("exists" =>true));
+        }
+        else{
+            return response()->json(array("exists"=>false));
+        }
+
+    }
 }
 
