@@ -6,7 +6,7 @@
           <h2>Projects Listings</h2>
        </div>
        <div class="col-md-4">
-           <a href="{{ url('projects/add') }}" >
+           <a href="{{ url('milestones/add') }}" >
                <span class="title btn btn-sm btn-primary pull-right"> Add New </span>
            </a>
        </div>
@@ -21,11 +21,12 @@
     <thead>
     <tr>
         <th>Id</th>
+        <th>Milestone</th>
         <th>Project Name</th>
-        <th>Client Name</th>
-        <th>Project Manager</th>
-        <th>Project Status</th>
+        <th>Developer</th>
+        <th>Status</th>
         <th>Payment Status</th>
+        <th>Budget</th>
         <th>Start Date</th>
         <th>Due Date </th>
         <th>Action</th>
@@ -33,7 +34,7 @@
     {{ csrf_field() }}
     </thead>
 </table>
- </div><div id="project_status" class="modal fade" role="dialog">
+ </div><div id="mile_status" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -75,7 +76,7 @@
             </div>
         </div>
     </div>
-    </div><div id="project_pay_status" class="modal fade" role="dialog">
+    </div><div id="milestone_pay_status" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -127,37 +128,38 @@
         var oTable = $('#users-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{!! route('get.projects_data') !!}',
+            ajax: '{!! route('get.milestones_data') !!}',
             columns: [
                 { data: 'id', name: 'id' },
+                { data: 'title', name: 'title' },
                 { data: 'pro_name', name: 'pro_name' },
-                { data: 'client_name', name: 'client_name' },
                 { data: 'emp_name', name: 'emp_name' },
-                { data: 'project_status', name: 'project_status' },
+                { data: 'mile_status', name: 'mile_status' },
                 { data: 'payment_status', name: 'payment_status' },
+                { data: 'budget', name: 'budget' },
                 { data: 'start_date', name: 'start_date' },
                 { data: 'due_date', name: 'due_date' },
                 {data: 'action', name: 'action'}
             ]
         });
 
-        $(document).on('click', '.project_status', function() {
-            $('.modal-title').text('Change Project Status');
-            $('.heading_text').text('Are you sure you want to Change the following Project Status?');
+        $(document).on('click', '.mile_status', function() {
+            $('.modal-title').text('Change Milestone Status');
+            $('.heading_text').text('Are you sure you want to Change the following Milestone Status?');
             $('.custom-button').text('Update');
             $('#id_delete').val($(this).data('id'));
             $('#name_statu').val($(this).data('title'));
             $('#title_delete').val($(this).data('status'));
             old_status = $(this).data('status');
-            $('select[name="project_status"]').find('option[value= '+old_status+']').attr("selected",true);
-            $('#project_status').modal('show');
+            $('select[name="mile_status"]').find('option[value= '+old_status+']').attr("selected",true);
+            $('#mile_status').modal('show');
             id = $('#id_delete').val();
         });
         $('.modal-footer').on('click', '#update_status', function() {
             status = $("select#selectd_value option").filter(":selected").val();
             $.ajax({
                type: 'Post',
-                url: 'projects_status',
+                url: 'milestones_status',
                 data: {
                     'id':id,
                     'status':status,
@@ -165,13 +167,13 @@
                 },
                 success: function(data) {
                     if(data === true )
-                        toastr.success('Successfully Changed Project Status!', 'Success Alert', {timeOut: 3000});
+                        toastr.success('Successfully Changed Milestone Status!', 'Success Alert', {timeOut: 3000});
                   //  $('.custom-button').removeClass('status_Change');
                     oTable.draw();
                 }
             });
         });
-        $(document).on('click', '.project_pay_status', function() {
+        $(document).on('click', '.milestones_pay_status', function() {
             $('.modal-title').text('Change Payment Status');
             $('.heading_text').text('Are you sure you want to Change the Payment Status?');
             $('.custom-button').text('Update');
@@ -180,14 +182,14 @@
             $('#title_delete').val($(this).data('status'));
             old_status = $(this).data('status');
             $('select[name="payment_status"]').find('option[value= '+old_status+']').attr("selected",true);
-            $('#project_pay_status').modal('show');
+            $('#milestone_pay_status').modal('show');
             id = $('#id_delete').val();
         });
         $('.modal-footer').on('click', '#update_pay_status', function() {
             status = $("select#payment_status_id option").filter(":selected").val();
             $.ajax({
                type: 'Post',
-                url: 'projects_pay_status',
+                url: 'milestones_pay_status',
                 data: {
                     'id':id,
                     'status':status,
@@ -195,7 +197,7 @@
                 },
                 success: function(data) {
                     if(data === true )
-                        toastr.success('Successfully Changed Project payment Status!', 'Success Alert', {timeOut: 3000});
+                        toastr.success('Successfully Changed Milestone payment Status!', 'Success Alert', {timeOut: 3000});
                  //   $('.custom-button').removeClass('status_Change');
                     oTable.draw();
                 }

@@ -17,13 +17,13 @@ class CreateMilestoneTable extends Migration
             $table->increments('id');
             $table->integer('emp_id')->unsigned();
             $table->integer('project_id')->unsigned();
-            $table->foreign('emp_id')->references('id')->on('employee');
+            $table->foreign('emp_id')->references('id')->on('users');
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->string('title');
             $table->string('description');
             $table->integer('budget')->nullable();
             $table->string('currency')->nullable();
-            $table->integer('status');
+            $table->integer('mile_status');
             $table->integer('payment_status');
             $table->string('start_date',50)->nullable();
             $table->string('due_date',50)->nullable();

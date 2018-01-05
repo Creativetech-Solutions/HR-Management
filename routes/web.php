@@ -173,6 +173,6 @@ Route::get('/get-data-getData_for_cl/{id}', ['as'=>'get.getData_for_cl','uses'=>
 Route::delete('/milestones_delete/{id}', ['as'=>'milestones_delete','uses'=>'Milestones\Milestones@destroy']);
 //   Change Status
 Route::post('/milestones_status/', ['as'=>'milestones_status','uses'=>'Milestones\Milestones@change_status']);
-Route::post('/milestones_pay_status/', ['as'=>'milestones_pay_status','uses'=>'Milestones\Milestones@change_payment_status']);
+Route::post('/milestones_pay_status/', ['as'=>'milestones_pay_status','uses'=>'Milestones\Milestones@milestones_pay_status']);
 Route::POST('/check_milestones_name', ['as'=>'check_milestones_name','uses'=>'Milestones\Milestones@check_Milestones_name']);
 
