@@ -167,8 +167,8 @@ Route::post('/milestones/update/{id}','Milestones\Milestones@update');
 Route::get('/milestones', 'Milestones\Milestones@index');
 Route::get('/get-data-milestones', ['as'=>'get.milestones_data','uses'=>'Milestones\Milestones@getData']);
 //get data for single employee and client
-Route::get('/get-data-getData_me/{id}', ['as'=>'get.milestones_data_me','uses'=>'Milestones\Milestones@getData_me']);
-Route::get('/get-data-getData_for_cl/{id}', ['as'=>'get.getData_for_cl','uses'=>'Milestones\Milestones@getData_for_cl']);
+//Route::get('/get-data-getData_me/{id}', ['as'=>'get.milestones_data_me','uses'=>'Milestones\Milestones@getData_me']);
+//Route::get('/get-data-getData_for_cl/{id}', ['as'=>'get.getData_for_cl','uses'=>'Milestones\Milestones@getData_for_cl']);
 //   delete
 Route::delete('/milestones_delete/{id}', ['as'=>'milestones_delete','uses'=>'Milestones\Milestones@destroy']);
 //   Change Status

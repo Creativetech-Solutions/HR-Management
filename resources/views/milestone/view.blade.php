@@ -205,7 +205,7 @@
         });
         $(document).on('click', '.delete-modal', function() {
             $('.modal-title').text('Delete');
-            $('.heading_text').text('Are you sure you want to Delete the following Project?');
+            $('.heading_text').text('Are you sure you want to Delete the following Milestone?');
             $('.custom-button').text('Delete');
             $('.custom-button').addClass('delete');
             $('#id_delete').val($(this).data('id'));
@@ -218,13 +218,13 @@
         $('.modal-footer').on('click', '.delete', function() {
             $.ajax({
                 type: 'DELETE',
-                url: 'projects_delete/'+id,
+                url: 'milestones_delete/'+id,
                 data: {
                     '_token': $('input[name=_token]').val(),
                 },
                 success: function(data) {
                     if(data === true )
-                        toastr.success('Successfully deleted Project!', 'Success Alert', {timeOut: 3000});
+                        toastr.success('Successfully deleted Milestone!', 'Success Alert', {timeOut: 3000});
                     $('.custom-button').removeClass('delete');
                     oTable.draw();
                 }
