@@ -84,7 +84,7 @@ class Users extends Controller
         $user       = User::find($id);
         $cl_data    = User::find($id)->clients()->first();  // call function in user class clients
         $cl_data    = $cl_data ?  $cl_data : " " ;
-        return view('users.Add_user', [
+        return view('users.add_user', [
             'cl_data'   =>  $cl_data,
             'user'      =>  $user,
             'title'     =>  $title,

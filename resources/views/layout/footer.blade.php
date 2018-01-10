@@ -684,6 +684,8 @@
 {!!Html::script('assets/js/form-elements.js')!!}
 {!!Html::script('vendor/bootstrap-fileinput/jasny-bootstrap.js')!!}
 
+
+
 <script>
     jQuery(document).ready(function() {
         Main.init();
@@ -691,6 +693,18 @@
         FormValidator.init();
         TableData.init();
       //  Index.init();
+
+       // app-sidebar-closed
+        var tr = $( "#app" ).hasClass( "add" );
+        if(tr === true){
+            $( "#app" ).addClass('app-sidebar-closed');
+            $( ".logo-img " ).hide();
+        }
+        $(document).on('click','.sidebar-toggler',function(){
+            $( ".logo-img " ).toggleClass('hide');
+        })
+
+
     });
 </script>
 
