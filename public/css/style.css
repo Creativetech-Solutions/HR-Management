@@ -6,6 +6,13 @@
 .model-selecter{
     z-index: 9999999!important;
 }
+/*Added By Fawad*/
+.select2-container--default .select2-selection--single {
+    height: 33px;
+    border-radius: 0;
+    border-color: #aeacb4;
+}
+/*End By Fawad*/
 section#page-title {
     padding: 40px 40px 0px 40px !important;
 }
@@ -20,6 +27,7 @@ section#page-title {
 span.p_skills.btn.btn-xs.btn-primary {
     margin: 2px;
 }
+
 .settings > .btn {
 
 
@@ -46,7 +54,41 @@ span.p_skills.btn.btn-xs.btn-primary {
     margin-left: 5px;
     z-index: 9999;
 }
-/* custum classes */
+.p-dashboard hr{
+    margin-top: 5px !important;
+    margin-bottom: 6px !important;
+}
+.p-dashboard .heading {
+    background-color: #8080801f;
+    margin: 0px;
+    margin-bottom: 7px;
+    margin-top: 15px;
+    padding: 8px;
+    color: #1fbba6;
+    margin-left: -16px;
+    margin-right: -16px;
+    border: 1px solid gainsboro;
+}
+.p-dashboard .user-left {
+    margin-top: -14px;
+}
+.p-dashboard p{
+    color: #8e8e93; ;
+}
+
+.user-model .modal-dialog{
+    width: 90% !important;
+}
+.add-task .modal-dialog{
+    width: 55% !important;
+}
+.add-task .select2-container {
+     width: 100% !important;
+}
+.add-milestone .select2-container {
+     width: 100% !important;
+}
+    /* custum classes */
 
 .mt-5{
      margin-top: 5px;
@@ -66,6 +108,12 @@ span.p_skills.btn.btn-xs.btn-primary {
 .mt-30{
      margin-top: 30px;
  }
+.margin-10{
+    margin: 10px;
+}
+.margin-3{
+    margin: 3px;
+}
 
 /* Media Queries
    min 992,768

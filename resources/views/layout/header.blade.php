@@ -35,7 +35,8 @@
     {!!Html::style('css/style.css')!!}
 </head>
 <body>
-<div id="app">
+
+<div id="app" class="{{ strpos(Route::currentRouteName(), 'projects.dashboard') !== false ? 'add' : "null" }}">
     @include('layout.sidebar')
     <div class="app-content">
         <!-- start: TOP NAVBAR -->

@@ -3,6 +3,7 @@
 Auth::routes();
 ///Route::get('/', 'HomeController@index')->name('');
 Route::get('/', 'Users\Users@index')->name('');
+Route::get('/dashboard', 'Dashboard\Dashboard@index');
 
 // **************** Clients *****************************
 
@@ -69,6 +70,7 @@ Route::post('/projects/update/{id}','Projects\Projects@update');
 //   View
 Route::get('/projects', 'Projects\Projects@index');
 Route::get('/get-data-projects', ['as'=>'get.projects_data','uses'=>'Projects\Projects@getData']);
+Route::get('/projects/dashboard/{id}', ['as'=>'projects.dashboard','uses'=>'Projects\Projects@dashboard']);
 //get data for single employee and client
 Route::get('/get-data-getData_me/{id}', ['as'=>'get.projects_data_me','uses'=>'Projects\Projects@getData_me']);
 Route::get('/get-data-getData_for_cl/{id}', ['as'=>'get.getData_for_cl','uses'=>'Projects\Projects@getData_for_cl']);
@@ -92,6 +94,7 @@ Route::get('/employee', 'Employee\Employee@index');
 Route::get('/get-data-employee', ['as'=>'get.employee_data','uses'=>'Employee\Employee@getData']);
 // profile
 Route::get('/employee/profile/{id}', ['as'=>'employee.profile','uses'=>'Employee\Employee@profile']);
+
 
 
 
@@ -169,8 +172,8 @@ Route::post('/milestones/update/{id}','Milestones\Milestones@update');
 Route::get('/milestones', 'Milestones\Milestones@index');
 Route::get('/get-data-milestones', ['as'=>'get.milestones_data','uses'=>'Milestones\Milestones@getData']);
 //get data for single employee and client
-Route::get('/get-data-getData_me/{id}', ['as'=>'get.milestones_data_me','uses'=>'Milestones\Milestones@getData_me']);
-Route::get('/get-data-getData_for_cl/{id}', ['as'=>'get.getData_for_cl','uses'=>'Milestones\Milestones@getData_for_cl']);
+//Route::get('/get-data-getData_me/{id}', ['as'=>'get.milestones_data_me','uses'=>'Milestones\Milestones@getData_me']);
+//Route::get('/get-data-getData_for_cl/{id}', ['as'=>'get.getData_for_cl','uses'=>'Milestones\Milestones@getData_for_cl']);
 //   delete
 Route::delete('/milestones_delete/{id}', ['as'=>'milestones_delete','uses'=>'Milestones\Milestones@destroy']);
 //   Change Status

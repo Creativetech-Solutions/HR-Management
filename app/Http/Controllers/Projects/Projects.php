@@ -33,7 +33,8 @@ class Projects extends Controller
             $data = Datatables::of($projects)
             ->escapeColumns()
             ->addColumn('action', function ($projects) {
-                return '<a href="' . route("projects.edit", $projects->id) . '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                return '<a href="' . route("projects.dashboard", $projects->id) . '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> View</a>
+                        <a href="' . route("projects.edit", $projects->id) . '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>
                   <button class="delete-modal btn btn-xs btn-danger" data-id="'.$projects->id.'" data-title="'.$projects->pro_name.'" data-content="">
                   <span class="glyphicon glyphicon-trash"></span> Delete</button>';})
             ->addColumn('project_status',function($projects){
@@ -249,6 +250,30 @@ class Projects extends Controller
         $Project  = Project::findOrFail($id);
         $data     = $Project->delete();
         return response()->json($data);
+    }
+    public function dashboard($id){ // project Dashboard
+        $title        =  'Add Task';
+        $action_url   =  'tasks/store';
+        $action_url2  =  'milestones/store';
+        $skills       =  DB::table('skills')->get();
+        $client       =  DB::table('clients as cl')->select('us.name','cl.id')->leftJoin('users as us', 'cl.user_id', '=', 'us.id')->where('us.status','=','1')->get();
+        $employee     =  DB::table('employee as em')->select('us.name','us.id')->Join('users as us', 'em.user_id', '=', 'us.id')->where('us.status','=','1')->get();
+        $currency     =  Countries::all();
+        $projects     =  " ";
+        $milestones   =  " ";
+        return view('projects.dashboard', [
+            'title'       => $title,
+            'action_url'  => $action_url,
+            'action_url2' => $action_url2,
+            'client'      => $client,
+            'employee'    => $employee,
+            'skills'      => $skills,
+            'currency'    => $currency,
+            'projects'    => $projects,
+            'milestones'  => $milestones,
+
+        ]);
+
     }
 }
 

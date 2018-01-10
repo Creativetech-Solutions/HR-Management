@@ -68,7 +68,7 @@ class Milestones extends Controller
         $title      = 'Add Milestone';
         $action_url ='milestones/store';
         $project     = DB::table('projects as pro')->select('pro.name as project_name','pro.id')->get();
-        $employee   = DB::table('employee as em')->select('us.name','us.id')->Join('users as us', 'em.user_id', '=', 'us.id')->where('us.status','=','1')->get();
+        $employee    = DB::table('employee as em')->select('us.name','us.id')->Join('users as us', 'em.user_id', '=', 'us.id')->where('us.status','=','1')->get();
         $currency   =  Countries::all();
         $milestones   = " ";
         return view('milestone.add_milestone', [
