@@ -34,9 +34,9 @@ class Milestones extends Controller
         $data = Datatables::of($milestones)
             ->escapeColumns()
             ->addColumn('action', function ($milestones) {
-                return '<a href="' . route("milestones.edit", $milestones->id) . '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>
-                  <button class="delete-modal btn btn-xs btn-danger" data-id="'.$milestones->id.'" data-title="'.$milestones->pro_name.'" data-content="">
-                  <span class="glyphicon glyphicon-trash"></span> Delete</button>';})
+                return '<a href="' . route("milestones.edit", $milestones->id) . '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>
+                  <button class="delete-modal btn btn-xs btn-danger" data-id="'.$milestones->id.'" data-title="'.$milestones->title.'" data-content="">
+                  <span class="glyphicon glyphicon-trash"></span></button>';})
             ->addColumn('mile_status',function($milestones){
                 if($milestones->mile_status == 1){
                     return '<span class="mile_status btn btn-xs btn-light-azure" data-id="'.$milestones->id.'" data-title="'.$milestones->pro_name.'" data-status="'.$milestones->mile_status.'">Active</span>';
@@ -154,5 +154,12 @@ class Milestones extends Controller
         }else{
             return response()->json($is_updated);
         }
+    }
+
+    public function destroy($id)
+    {
+        $Milestone  = Milestone::findOrFail($id);
+        $data     = $Milestone->delete();
+        return response()->json($data);
     }
 }
