@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Projects;
 
+use App\model\Clients;
+use App\model\Task;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DataTables;
@@ -182,13 +184,13 @@ class Projects extends Controller
         $skills     = DB::table('skills')->get();
         $client     = DB::table('clients as cl')->select('us.name','cl.id')->leftJoin('users as us', 'cl.user_id', '=', 'us.id')->where('us.status','=','1')->get();
         $employee   = DB::table('employee as em')->select('us.name','us.id')->Join('users as us', 'em.user_id', '=', 'us.id')->where('us.status','=','1')->get();
-        $currency   =  Countries::all();
+        $currency   = Countries::all();
         $projects   = Project::find($id);
         return view('projects.add_projects', [
-            'title'     =>$title,
-            'action_url'=>$action_url,
-            'client'    =>$client,
-            'employee'  =>$employee,
+            'title'     => $title,
+            'action_url'=> $action_url,
+            'client'    => $client,
+            'employee'  => $employee,
             'skills'    => $skills,
             'currency'  => $currency,
             'projects'  => $projects,
@@ -252,28 +254,50 @@ class Projects extends Controller
         return response()->json($data);
     }
     public function dashboard($id){ // project Dashboard
-        $title        =  'Add Task';
+
         $action_url   =  'tasks/store';
         $action_url2  =  'milestones/store';
-        $skills       =  DB::table('skills')->get();
-        $client       =  DB::table('clients as cl')->select('us.name','cl.id')->leftJoin('users as us', 'cl.user_id', '=', 'us.id')->where('us.status','=','1')->get();
-        $employee     =  DB::table('employee as em')->select('us.name','us.id')->Join('users as us', 'em.user_id', '=', 'us.id')->where('us.status','=','1')->get();
+        $projects     =  Project::find($id);
+        $client       =  Project::find($id)->get_client_data; // get Client that belong to projects
+        $all_tasks    =  DB::table('tasks as ts')->select('ts.id','ts.assigned_by','ts.assigned_to','us.name as ass_by','ts.name as task_name','man.name as ass_to','ts.description','ts.status','ts.due_date','ts.updated_at')
+                     ->leftjoin('users as us','ts.assigned_by','=','us.id' )
+                     ->leftjoin('users as man','ts.assigned_to','=','man.id' )
+                     ->where('ts.project_id','=',$id)->get();
+        $completed_tasks    =  DB::table('tasks as ts')->select('ts.id','us.name as ass_by','ts.name as task_name','man.name as ass_to','ts.description','ts.status','ts.due_date','ts.updated_at')
+                     ->leftjoin('users as us','ts.assigned_by','=','us.id' )
+                     ->leftjoin('users as man','ts.assigned_to','=','man.id' )
+                     ->where('ts.project_id','=',$id)
+                     ->where('ts.status','=','3')->limit(6)->orderBy('ts.updated_at', 'DESC')->get();
+        $user_id            =  $client->user_id;
+        $users              =  DB::table('users')->where('id',$user_id)->first();
+        $projects_man       =  $projects->project_manager;
+        $projects_man       =  DB::table('users')->where('id',$projects_man)->first();
+        $project_develop    =  explode(",",$projects->developers);
+        $project_developers =  User::find($project_develop);
+        $employee           =  DB::table('employee as em')->select('us.name','us.id')->Join('users as us', 'em.user_id', '=', 'us.id')->where('us.status','=','1')->get();
+        $skills             =  DB::table('skills')->get();
+        // $client       =  DB::table('clients as cl')->select('us.name','cl.id')->leftJoin('users as us', 'cl.user_id', '=', 'us.id')->where('us.status','=','1')->get();
         $currency     =  Countries::all();
-        $projects     =  " ";
         $milestones   =  " ";
+        $task_developer = array();
+        foreach($all_tasks as $task){
+            $task_developer[$task->assigned_to][] = $task;
+        }
         return view('projects.dashboard', [
-            'title'       => $title,
-            'action_url'  => $action_url,
-            'action_url2' => $action_url2,
-            'client'      => $client,
-            'employee'    => $employee,
-            'skills'      => $skills,
-            'currency'    => $currency,
-            'projects'    => $projects,
-            'milestones'  => $milestones,
-
+            'action_url'      => $action_url,
+            'action_url2'     => $action_url2,
+            'users'           => $users,
+            'employee'        => $employee,
+            'skills'          => $skills,
+            'currency'        => $currency,
+            'projects'        => $projects,
+            'milestones'      => $milestones,
+            'projects_man'    => $projects_man,
+            'project_dev'     => $project_developers,
+            'tasks'           => $all_tasks,
+            'task_developer'  => $task_developer,
+             'com_tasks'      => $completed_tasks,
         ]);
-
     }
 }
 

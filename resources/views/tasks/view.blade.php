@@ -1,7 +1,7 @@
 @extends('layout.layout')
 @section('content')
     @parent
-<div class="row">
+  <div class="row">
                     <div class="col-md-8">
                      <h2>Tasks Listings</h2>
                     </div>

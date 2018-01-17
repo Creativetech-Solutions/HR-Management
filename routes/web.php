@@ -101,19 +101,23 @@ Route::get('/employee/profile/{id}', ['as'=>'employee.profile','uses'=>'Employee
 //  ****************  Tasks  ********************************
 
 //   Add
-Route::get('/tasks/add', 'Tasks\Tasks@add');
-Route::post('/tasks/store','Tasks\Tasks@store');
+//Route::get('/tasks/add', 'Tasks\Tasks@add');
+//Route::post('/tasks/store','Tasks\Tasks@store');
+Route::POST('/store', ['as'=>'store','uses'=>'Tasks\Tasks@store']);
+Route::post('/task/update/{id}','Tasks\Tasks@update');
+Route::delete('/task_delete/{id}', ['as'=>'task_delete','uses'=>'Tasks\Tasks@destroy']);
+Route::post('/get_activities/{id}', ['as'=>'get_activities','uses'=>'Tasks\Tasks@get_activities']);
 
 //   edit
-Route::get('/tasks/edit/{id}', ['as'=>'tasks.edit','uses'=>'Tasks\Tasks@edit']);     // use like this when url send from view
-Route::post('/tasks/update/{id}','Tasks\Tasks@update');
+//Route::get('/tasks/edit/{id}', ['as'=>'tasks.edit','uses'=>'Tasks\Tasks@edit']);     // use like this when url send from view
+//Route::post('/tasks/update/{id}','Tasks\Tasks@update');
 //   View
 Route::get('/tasks', 'Tasks\Tasks@index');
 Route::get('/get-data-tasks', ['as'=>'get.tasks_data','uses'=>'Tasks\Tasks@getData']);
 //   delete
 Route::delete('/tasks_delete/{id}', ['as'=>'tasks_delete','uses'=>'Tasks\Tasks@destroy']);
 //   Change Status
-Route::post('/tasks_status/', ['as'=>'tasks_status','uses'=>'Tasks\Tasks@change_status']);
+Route::post('/change_task_status', ['as'=>'change_task_status','uses'=>'Tasks\Tasks@change_task_status']);
 Route::post('/tasks_pay_status/', ['as'=>'tasks_pay_status','uses'=>'Tasks\Tasks@change_payment_status']);
 Route::POST('/check_tasks_name', ['as'=>'check_tasks_name','uses'=>'Tasks\Tasks@check_tasks_name']);
 

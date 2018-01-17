@@ -20,7 +20,9 @@ class ProjectsTable extends Migration
             $table->integer('budget')->nullable();
             $table->string('currency')->nullable();
             $table->integer('project_manager');// id
+            $table->string('developers')->nullable();
             $table->longText('required_skills')->nullable();
+            $table->longText('description')->nullable();
             $table->integer('project_status');
             $table->integer('payment_status');
             $table->string('start_date',50)->nullable();

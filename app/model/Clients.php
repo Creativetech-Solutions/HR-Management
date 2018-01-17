@@ -10,4 +10,6 @@ class Clients extends Model
     protected $fillable = [
         'user_id','platform','status','required_skills'
     ];
+
+
 }

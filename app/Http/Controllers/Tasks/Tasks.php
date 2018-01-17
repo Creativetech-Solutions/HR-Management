@@ -8,11 +8,13 @@ use DataTables;
 use App\User;  // call user model
 use App\model\Project;
 use App\model\Task;
+use App\model\Task_activity;
 use Countries;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse ; // for data table
+use Illuminate\Support\Facades\Auth;
 
 class Tasks extends Controller
 {
@@ -87,21 +89,27 @@ class Tasks extends Controller
     }
     public function store(Request $request)
     {
-        $Last_array = Project::create([
-            'name'               => $request->name,
-            'budget'             => $request->budget,
-            'currency'           => $request->currency,
-            'project_manager'    => $request->project_manager,
-            'required_skills'    => !empty($request->required_skills) ? implode(',',$request->required_skills): " ",
-            'project_status'     => $request->project_status,
-            'payment_status'     => $request->payment_status,
-            'start_date'         => date("Y-m-d H:i:s",strtotime($request->start_date)),
-            'due_date'           => date("Y-m-d H:i:s",strtotime($request->due_date)),
-            'client_id'          => $request->client_id,
+        $Last_array = Task::create([
+            'name'            => $request->task_name,
+            'project_id'      => $request->p_id,
+            'due_date'        => $request->due_date,
+            'assigned_to'     => $request->developer,
+            'description'     => $request->description,
+            'assigned_by'     => $request->ass_by_id,
+            'status'          => '0',
         ]);
-        return redirect('projects')->with('message', 'Project Added successfully!');
+        $user_name  = !empty( Auth::user()->name) ? Auth::user()->name  : Auth::user()->email;
+        $activity   = 'Added this Task to To Do';
+        Task_activity::create([
+            'task_id'         => $Last_array->id,
+            'activity'        => $activity,
+            'user_name'       => $user_name,
+            'user_id'         => $request->ass_by_id,  //updated user id
+        ]);
+        $last_id = $Last_array->id;
+        return $last_id;
     }
-    public function edit($id)
+    public function edit($id) // not in use
     {
         $title      = 'Edit Task';
         $action_url ='projects/update/'.$id;
@@ -122,68 +130,85 @@ class Tasks extends Controller
     }
     public function update(Request $request,$id)
     {
-        $projects                  = Project::find($id);
-        $projects->name            = $request->name;
-        $projects->budget          = $request->budget;
-        $projects->currency        = $request->currency;
-        $projects->project_manager = $request->project_manager;
-        $projects->required_skills = !empty($request->required_skills) ? implode(',',$request->required_skills): " ";
-        $projects->project_status  = $request->project_status;
-        $projects->payment_status  = $request->payment_status;
-        $projects->start_date      = date("Y-m-d H:i:s",strtotime($request->start_date));
-        $projects->due_date        = date("Y-m-d H:i:s",strtotime($request->due_date));
-        $projects->client_id       = $request->client_id;
-        $projects->save();
+        $task               = Task::find($id);
+        $task->name         = $request->task_name;
+        $task->project_id   = $request->p_id;
+        $task->due_date     = $request->due_date;
+        $task->assigned_to  = $request->developer;
+        $task->description  = $request->description;
+        $task->assigned_by  = $request->ass_by_id;
+        $task->status       = $request->status;
+        $task->save();
 
-        return redirect('projects')->with('message', 'Project Updated successfully!');
+        $user_name  = !empty( Auth::user()->name) ? Auth::user()->name  : Auth::user()->email;
+        $activity   = 'Updated this Task';
+        Task_activity::create([
+            'task_id'         => $id,
+            'activity'        => $activity,
+            'user_name'       => $user_name,
+            'user_id'         => $request->ass_by_id,  //updated user id
+        ]);
+        return $id;
     }
-    public function check_Projects_name(Request $request){
-        $name    = $request->input('name');
-        $p_id    = $request->input('p_id');
-        if($p_id){
-            $isExists = Project::where([['name',$name],['id','!=',$p_id]])->first();
-        }else{
-            $isExists = Project::where('name',$name)->first();
-        }
-        if($isExists){
-            return response()->json(array("exists" => true));
-        }else{
-            return response()->json(array("exists" => false));
-        }
-    }
-    public function change_status(Request $request){
-        $id              = $request->input('id');
-        $status          = $request->input('status');
-        $is_updated      = Project::find($id)->update(array('project_status' => $status));
+
+    public function change_task_status(Request $request){
+        $id         = $request->input('id');
+        $status     = $request->input('status');
+        $old_status = Task::find($id);
+        $old_status = $old_status->status;
+        switch ($old_status){
+            case 0:
+                $old_status = "To Do" ;
+                break;
+            case 1:
+                $old_status = "Doing" ;
+                break;
+            case 2:
+                $old_status = "Review" ;
+                break;
+            case 3:
+                $old_status = "Done" ;
+                break;
+         }
+         switch ($status){
+            case 0:
+                $new_status = "To Do" ;
+                break;
+            case 1:
+                $new_status = "Doing" ;
+                break;
+            case 2:
+                $new_status = "Review" ;
+                break;
+            case 3:
+                $new_status = "Done" ;
+                break;
+         }
+        $is_updated      = Task::find($id)->update(array('status' => $status));
         if($is_updated){
+            $user_name  = !empty( Auth::user()->name) ? Auth::user()->name  : Auth::user()->email;
+            $activity   = 'Moved this card from  '.$old_status.' to '. $new_status;
+            Task_activity::create([
+                'task_id'         => $id,
+                'activity'        => $activity,
+                'user_name'       => $user_name,
+                'user_id'         => Auth::user()->id,  //updated user id
+            ]);
             return response()->json($is_updated);
         }else{
             return response()->json($is_updated);
         }
     }
-    public function change_payment_status(Request $request){
-        $id             = $request->input('id');
-        $status         = $request->input('status');
-        $is_updated     = Project::find($id)->update(array('payment_status' => $status));
-        if($is_updated){
-            return response()->json($is_updated);
-        }else{
-            return response()->json($is_updated);
-        }
-    }
+
     public function destroy($id)
     {
-        $Project  = Project::findOrFail($id);
-        $data     = $Project->delete();
+        $task  = Task::findOrFail($id);
+        $data     = $task->delete();
         return response()->json($data);
     }
-    public function multiple_upload(Request $request) {
-        // getting all of the post data
-        $file1 = $request->file('images')->getClientOriginalName();
-                $request->file('images')->move(
-            base_path().'/public/images/', $file1
-        );
-     }
+    public function get_activities($id){
+        return Task::find($id)->getactivity()->get();
+    }
 }
 
 

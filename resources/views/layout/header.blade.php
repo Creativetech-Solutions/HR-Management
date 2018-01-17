@@ -46,6 +46,8 @@
                 <a href="#" class="sidebar-mobile-toggler pull-left hidden-md hidden-lg" class="btn btn-navbar sidebar-toggle" data-toggle-class="app-slide-off" data-toggle-target="#app" data-toggle-click-outside="#sidebar">
                     <i class="ti-align-justify"></i>
                 </a>
+
+
            <img class="logo-img" src="{{URL::asset('/assets/images/logo/logo.png')}}" alt="Creative Tech Solutions">
 
 
