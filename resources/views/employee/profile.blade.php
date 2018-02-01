@@ -14,6 +14,11 @@
                     Edit Account
                 </a>
             </li>
+            <li class="" id="documents">
+                <a data-toggle="tab" href="#panel_documents">
+                    Documents
+                </a>
+            </li>
             <li>
                 <a data-toggle="tab" href="#panel_projects">
                     Projects
@@ -21,7 +26,7 @@
             </li>
         </ul>
         <div class="tab-content">
-            <div id="panel_overview" class="tab-pane fade in active">
+            <div id="panel_overview" class="tab-pane fade  in active ">
                 <div class="row">
                     <div class="col-sm-5 col-md-4">
                         <div class="user-left">
@@ -143,11 +148,6 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>Address</td>
-                                    <td>{{ $user->city ." , ". $user->country }}</td>
-                                    <td><a href="#panel_edit_account" class="show-tab"></a></td>
-                                </tr>
                                 <tr>
                                     <td>Skills</td>
                                     <td><?php
@@ -308,10 +308,10 @@
                                     <li class=" ">
                                         <p class="ltwt_tweet_text">
                                             <a href class="text-info">
-                                               {{ $dev_pro->name }}
+                                               <?= !empty($dev_pro->name) ? $dev_pro->name : " "   ?>
                                             </a>
                                         </p>
-                                        <span class="block text-light"><i class="fa fa-fw fa-clock-o"></i> Start Date: {{ $dev_pro->start_date }}</span>
+                                        <span class="block text-light"><i class="fa fa-fw fa-clock-o"></i> Start Date: <?= !empty($dev_pro->start_date) ? $dev_pro->start_date : " "   ?></span>
                                     </li>
                                 </ul>
                             </div>
@@ -319,56 +319,62 @@
                     </div>
                 </div>
             </div>
+            <div id="panel_documents" class="tab-pane fade padding-bottom-30">
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <h4 class="activity mt-20 "> </h4>
+                        <div class="fileinputappends"></div>
+                        <form enctype="multipart/form-data" id="uploaddoc">
+                            <div class="alert alert-danger print-error-msg" style="display:none">
+                                <ul></ul>
+                            </div>
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="hidden" id="emp_id" name="emp_id" value="{{ !empty($dev->id) ? $dev->id : " "}}" >
+                            <div class="form-group">
+                                <label>Add New File:</label>
+                                <input type="file" name="attachment" class="form-control" id="uploadfile">
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success upload-file" type="submit">Upload File</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <div id="panel_projects" class="tab-pane fade padding-bottom-30">
-                <table class="table-bordered table table-striped table-bordered table-hover table-full-width" id="projects">
-                    <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Project Name</th>
-                        <th>Client Name</th>
-                        <th>Project Manager</th>
-                        <th>Start Date</th>
-                        <th>Due Date </th>
-                        <th>Project Status</th>
-                        <th>Payment Status</th>
-                     </tr>
-                    {{ csrf_field() }}
-                    </thead>
-                </table>
+                <div class="row">
+                    <?php
+                    if(!empty($dev_pro)){
+                        foreach($dev_pro as $dev_pr){?>
+                            <div class="col-md-3 col-sm-4 portfolio "  style="border: ridge;">
+                                <div class="content">
+                                    <div class="p-image">
+                                        <img src="{{asset('assets/images/logo/logo.jpg')}}"  alt="" style="width:100%; margin-top: 10px">
+                                    </div>
+                                     <hr>
+                                    <span class="heading"><a href="{!! url('projects/dashboard/'.$dev_pr->id) !!}"> {{ $dev_pr->name }}</a></span>
+                                    <p  class="well"><?= substr($dev_pr->description, 0, 150) ?></p>
+                                    <table>
+                                        <tr><td>Team Members:</td><td> {{$user->name}} </td></tr>
+                                        <tr><td>Start Date: </td><td> {{ $dev_pr->start_date }}</td></tr>
+                                        <tr><td>Due Date: </td><td> {{ $dev_pr->due_date }}</td></tr>
+                                    </table>
+                                </div>
+                            </div>
+                <?php  } } ?>
+                </div>
             </div>
         </div>
     </div>
     <?php $u_id = $user->id;?>
+    <?php $emp_id = $dev->id;?>
+
 @stop
 @section('script')
     @parent
     <script>
-        jQuery(function($) {
-            var oTable = $('#projects').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{!! route('get.projects_data_me',$u_id) !!}',
-                columns: [
-                    { data: 'id', name: 'id' },
-                    { data: 'pro_name', name: 'pro_name' },
-                    { data: 'client_name', name: 'client_name' },
-                    { data: 'emp_name', name: 'emp_name' },
-                    { data: 'start_date', name: 'start_date' },
-                    { data: 'due_date', name: 'due_date' },
-                    { data: 'project_status', name: 'project_status' },
-                    { data: 'payment_status', name: 'payment_status' },
-                ]
-
-            });
-        });
-        $(document).ready(function(){
-           var tp = $('#projects > tr').size();
-            $('#p_t').text(tp);
-        });
 
         $(document).on('click','#update',function(){
-
-
             var id ='{!! $u_id !!}';
             var names = $('#logo')[0].files[0];
             $.ajax({
@@ -385,5 +391,97 @@
                 }
             });
         })
+        // upload Documents
+        $("#uploaddoc").submit(function(){
+            var form = $('#uploaddoc')[0]; // You need to use standard javascript object here
+            var formData = new FormData(form);
+            $.ajax({
+                url : '{!! url('upload_developers_doc') !!}',
+                data: formData,
+                type: 'POST',
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if(data['success']){
+                        $("#uploadfile").val("");
+                        $('.fileinputappends').empty();
+                        var emp_id = '{{ $emp_id }}';
+                        getattachedfiless(emp_id);
+                        toastr.success('File Uploaded Successfully',"Success Alert",{timeOut:3000});
+                    }else{
+                        toastr.error('Please Upload only jpeg,png,jpg,gif,doc,pdf,docx,zip,svg files',"Warning Alert",{timeOut:4000});
+                    }
+                },
+            });
+            return false;
+        });
+        $(document).on("click","#documents",function(){
+            $('.fileinputappends').empty();
+            var emp_id = '{{ $emp_id }}';
+            getattachedfiless(emp_id);
+        });
+        function getattachedfiless(emp_id){
+            var id = emp_id;
+            $.ajax({
+                type:'POST',
+                url:  '{!! url('get_developers_docs') !!}',
+                data:{'id':id,'_token': $('input[name=_token]').val(),},
+                success:function(data){
+                    $.each(data,function(){
+                        var src = (this['document']) ? this['document'] : "";
+                        var path = "{{ URL::asset('images/employee_doc')}}";
+                        var extension = src.substring(src.lastIndexOf('.')+1);
+                        switch(extension){
+                            case 'txt':
+                                var paths = path +'/'+'txt.png';
+                                break;
+                            case 'zip':
+                                var paths = path +'/'+'zip.jpg';
+                                break;
+                            case 'doc':
+                                var paths = path +'/'+'doc.png';
+                                break;
+                            case 'pdf':
+                                var paths = path +'/'+'pdf.png';
+                                break;
+                            case 'docx':
+                                var paths = path +'/'+'doc.png';
+                                break;
+                            default:
+                                var paths = path +'/'+src;
+                        }
+                        $('.fileinputappends').append('<div class="fileinput fileinput-new" data-provides="fileinput"><div class="user-image">'
+                            +'<div class="fileinput-new thumbnail"><img src="'+paths+'" alt="" data-src="'+src+'"></div>'
+                            +'<div class="fileinput-preview fileinput-exists thumbnail"></div>'
+                            +'<div class="user-image-buttons">'
+                            +'<span class="btn btn-xs btn-danger remove_file" data-id="'+ this['id']+ '"><i class="fa fa-close"></i></span>'
+                            +'<a href="'+path+'/'+src+'" download><span class="btn btn-xs btn-success"><i class="fa fa-arrow-down"></i></span></a>'
+                            +'</div><div class="img-text">'+src.slice(-15)+'</div></div></div>');
+                    });
+                }
+            });
+        }
+        $(document).on('click','.remove_file',function(e){  // Remove Uploeded File
+            e.preventDefault();
+            var af_id = $(this).data('id');
+            var img_src = $(this).parents('.user-image').find('img').data('src');
+            $.ajax({
+                type:'DELETE',
+                url:'{!! url('remove_employee_doc') !!}',
+                data:{'id':af_id,'img_src':img_src,'_token': $('input[name=_token]').val(),},
+                success:function(data){
+                    if(data){
+                        $('.fileinputappends').empty();
+                        var emp_id = '{{ $emp_id }}';
+                        getattachedfiless(emp_id);
+                        toastr.success('File Removed Successfully!','Success Alert!',{timeOut:3000});
+                    }else{
+                        toastr.error('Something Hapened Wrong Please Try Again!','Success Alert!',{timeOut:3000});
+                    }
+                }
+            });
+        });
+
+
     </script>
 @stop

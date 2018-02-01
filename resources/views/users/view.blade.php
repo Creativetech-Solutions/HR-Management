@@ -28,7 +28,6 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>User Role</th>
-                        <th>Country</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -50,7 +49,6 @@
                 { data: 'name', name: 'name' },
                 { data: 'email', name: 'email' },
                 { data: 'user_type', name: 'user_type' },
-                { data: 'country', name: 'country' },
                 { data: 'status', name: 'status' },
                 {data: 'action', name: 'action'}
             ]
@@ -62,7 +60,7 @@
             $('.custom-button').text('Delete');
             $('.custom-button').addClass('delete');
             $('#id_delete').val($(this).data('id'));
-            $('#name').val($(this).data('title'));
+            $('.change_name').val($(this).data('title'));
             $('#title_delete').val($(this).data('content'));
             $('#deleteModal').modal('show');
             id = $('#id_delete').val();
@@ -90,7 +88,7 @@
             $('.custom-button').text(status_val);
             $('.custom-button').addClass('status_Change');
             $('#id_delete').val($(this).data('id'));
-            $('#name').val($(this).data('title'));
+            $('.change_name').val($(this).data('title'));
             $('#title_delete').val($(this).data('content'));
             $('#deleteModal').modal('show');
             id = $('#id_delete').val();

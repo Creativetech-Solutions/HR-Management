@@ -292,10 +292,10 @@
                                     <li class=" ">
                                         <p class="ltwt_tweet_text">
                                             <a href class="text-info">
-                                                {{ $dev_pro->name }}
+                                                {{ !empty($dev_pro->name) ? $dev_pro->name : " " }}
                                             </a>
                                         </p>
-                                        <span class="block text-light"><i class="fa fa-fw fa-clock-o"></i> Start Date: {{ $dev_pro->start_date }}</span>
+                                        <span class="block text-light"><i class="fa fa-fw fa-clock-o"></i> Start Date: {{ !empty($dev_pro->start_date) ? $dev_pro->start_date : "" }}</span>
                                     </li>
                                 </ul>
                             </div>

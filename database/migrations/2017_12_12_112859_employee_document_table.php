@@ -17,11 +17,9 @@ class EmployeeDocumentTable extends Migration
             $table->increments('id');
             $table->integer('emp_id')->unsigned();
             $table->timestamps();
-            $table->integer('doc_id')->unsigned();
-            $table->longText('document');
+            $table->longText('document')->nullable();
             $table->foreign('emp_id')->references('id')->on('employee')->onDelete('cascade');
-            $table->foreign('doc_id')->references('id')->on('documents')->onDelete('cascade');
-        });
+         });
     }
 
     /**

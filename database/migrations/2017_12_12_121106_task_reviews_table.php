@@ -17,9 +17,9 @@ class TaskReviewsTable extends Migration
             $table->increments('id');
             $table->integer('task_id')->unsigned();
             $table->integer('user_id');
-            $table->longText('review');
-            $table->longText('attachment');
-            $table->integer('status');
+            $table->longText('review')->nullable();
+            $table->longText('attachment')->nullable();
+            $table->integer('status')->nullable();
             $table->timestamps();
             $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade');
         });

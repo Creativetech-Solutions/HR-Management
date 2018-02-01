@@ -257,8 +257,8 @@
                      </ul>
                 </li>
                 <li>
-                    <a href="{{ route('logout') }}"onclick="event.preventDefault();
-                       document.getElementById('logout-form').submit();">
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                       document.getElementById('logout-form-sidebar').submit();">
                         <div class="item-content">
                             <div class="item-media">
                                 <i class="ti-na"></i>
@@ -268,7 +268,7 @@
                             </div>
                         </div>
                     </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    <form id="logout-form-sidebar" action="{{ route('logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
                  </li>

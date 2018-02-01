@@ -24,7 +24,7 @@ class ProjectsTable extends Migration
             $table->longText('required_skills')->nullable();
             $table->longText('description')->nullable();
             $table->integer('project_status');
-            $table->integer('payment_status');
+            $table->integer('payment_status')->nullable();;
             $table->string('start_date',50)->nullable();
             $table->string('due_date',50)->nullable();
             $table->timestamps();

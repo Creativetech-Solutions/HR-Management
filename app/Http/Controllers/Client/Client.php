@@ -125,8 +125,8 @@ class Client extends Controller
         $dev_data   = User::find($id)->clients()->first();  // call function in user class Developers
         $ids        = $dev_data->id;
         $dev_pro    = Project::get()->where('client_id',"=",$ids)->last();  // call function in user class Developers
-        $dev_data   = $dev_data ?  $dev_data : " " ;
-        $dev_pro    = $dev_pro  ?  $dev_pro  : " " ;
+        $dev_data   = !empty($dev_data) ?  $dev_data : " " ;
+        $dev_pro    = !empty($dev_pro)  ?  $dev_pro  : " " ;
         if(!empty($dev_data->required_skills)){
             $skills     = explode(',',$dev_data->required_skills);
             $skills     = DB::table('skills')->whereIn('id',$skills)->get();

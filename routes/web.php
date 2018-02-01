@@ -94,6 +94,9 @@ Route::get('/employee', 'Employee\Employee@index');
 Route::get('/get-data-employee', ['as'=>'get.employee_data','uses'=>'Employee\Employee@getData']);
 // profile
 Route::get('/employee/profile/{id}', ['as'=>'employee.profile','uses'=>'Employee\Employee@profile']);
+Route::post('/upload_developers_doc', ['as'=>'upload_developers_doc','uses'=>'Employee\Employee@upload_developers_doc']);
+Route::post('/get_developers_docs', ['as'=>'get_developers_docs','uses'=>'Employee\Employee@get_developers_docs']);
+Route::delete('/remove_employee_doc', ['as'=>'remove_employee_doc','uses'=>'Employee\Employee@remove_employee_doc']);
 
 
 
@@ -107,6 +110,11 @@ Route::POST('/store', ['as'=>'store','uses'=>'Tasks\Tasks@store']);
 Route::post('/task/update/{id}','Tasks\Tasks@update');
 Route::delete('/task_delete/{id}', ['as'=>'task_delete','uses'=>'Tasks\Tasks@destroy']);
 Route::post('/get_activities/{id}', ['as'=>'get_activities','uses'=>'Tasks\Tasks@get_activities']);
+Route::post('/store_review', ['as'=>'store_review','uses'=>'Tasks\Tasks@store_review']);
+Route::post('/get_reviews/{id}', ['as'=>'get_reviews','uses'=>'Tasks\Tasks@get_reviews']);
+Route::post('/upload_files', ['as'=>'upload_files','uses'=>'Tasks\Tasks@upload_files']);
+Route::post('/get_task_attachmetns', ['as'=>'get_task_attachmetns','uses'=>'Tasks\Tasks@get_task_attachmetns']);
+
 
 //   edit
 //Route::get('/tasks/edit/{id}', ['as'=>'tasks.edit','uses'=>'Tasks\Tasks@edit']);     // use like this when url send from view
@@ -116,6 +124,7 @@ Route::get('/tasks', 'Tasks\Tasks@index');
 Route::get('/get-data-tasks', ['as'=>'get.tasks_data','uses'=>'Tasks\Tasks@getData']);
 //   delete
 Route::delete('/tasks_delete/{id}', ['as'=>'tasks_delete','uses'=>'Tasks\Tasks@destroy']);
+Route::delete('/remove_task_file', ['as'=>'remove_task_file','uses'=>'Tasks\Tasks@remove_task_file']);
 //   Change Status
 Route::post('/change_task_status', ['as'=>'change_task_status','uses'=>'Tasks\Tasks@change_task_status']);
 Route::post('/tasks_pay_status/', ['as'=>'tasks_pay_status','uses'=>'Tasks\Tasks@change_payment_status']);
@@ -166,9 +175,12 @@ Route::post('/settings/update/{id}','Settings\Setting@update');
 
 // ****************  Milestones  *****************************
 
+Route::post('/add_mile_stone','Milestones\Milestones@store');
+Route::post('/view_mile_stone_data','Milestones\Milestones@view_mile_stone_data');
+
 //   Add
 Route::get('/milestones/add', 'Milestones\Milestones@add');
-Route::post('/milestones/store','Milestones\Milestones@store');
+//Route::post('/milestones/store','Milestones\Milestones@store');
 //   edit
 Route::get('/milestones/edit/{id}', ['as'=>'milestones.edit','uses'=>'Milestones\Milestones@edit']);     // use like this when url send from view
 Route::post('/milestones/update/{id}','Milestones\Milestones@update');

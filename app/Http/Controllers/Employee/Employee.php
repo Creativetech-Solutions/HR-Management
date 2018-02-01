@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers\Employee;
+use App\model\Employee_document;
 use App\model\Employees;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -27,7 +28,7 @@ class Employee extends Controller
     {
         $employee = DB::table('employee as em')
             ->leftJoin('users as us', 'em.user_id', '=', 'us.id')
-            ->select('us.id','us.name as name','us.email as email','us.country as country','us.status as status','em.last_increment as last_increment','em.total_leaves as total_leaves');
+            ->select('us.id','us.name as name','us.email as email','us.status as status','em.last_increment as last_increment','em.total_leaves as total_leaves');
         $data = Datatables::of($employee)
             ->escapeColumns()
             ->addColumn('action', function ($employee) {
@@ -65,12 +66,9 @@ class Employee extends Controller
     {
         $Last_array = User::create([
             'email'        => $request->email,
-            'name'         => $request->name,
+            'name'         => $request->user_name,
             'first_name'   => $request->first_name,
             'last_name'    => $request->last_name,
-            'city'         => $request->city,
-            'country'      => $request->country,
-            'zipcode'      => $request->zipcode,
             'phone'        => $request->phone,
             'status'       => '0',
             'active'       => '0',
@@ -110,12 +108,9 @@ class Employee extends Controller
     public function update(Request $request,$id)
     {
         $User                = User::find($id);
-        $User->name          = $request->name;
+        $User->name          = $request->user_name;
         $User->first_name    = $request->first_name;
         $User->last_name     = $request->last_name;
-        $User->city          = $request->city;
-        $User->country       = $request->country;
-        $User->zipcode       = $request->zipcode;
         $User->gender        = $request->gender;
         $User->phone         = $request->phone;
         $User->password      = bcrypt($request->password);
@@ -133,7 +128,8 @@ class Employee extends Controller
         $title      = 'User Profile';
         $user       = User::find($id);
         $dev_data   = User::find($id)->developer()->first();  // call function in user class Developers
-        $dev_pro    = User::find($id)->get_projects()->orderBy('id', 'desc')->first();  // call function in user class Developers
+        $dev_pro    = User::find($id)->get_projects()->orderBy('id', 'edsc')->get();  // call function in user class Developers
+        $dev_pro    = DB::table('projects')->whereRaw('FIND_IN_SET(?,developers)', [$id])->get();
         $dev_data   = $dev_data ?  $dev_data : " " ;
         $dev_pro    = $dev_pro  ?  $dev_pro  : " " ;
         if(!empty($dev_data->required_skills)){
@@ -150,5 +146,35 @@ class Employee extends Controller
             'dev_pro'    =>  $dev_pro,
         ]);
     }
-
+    Public function upload_developers_doc(Request $request){
+        $validator = Validator::make($request->all(), [
+            'attachment' => 'mimes:jpeg,png,jpg,gif,doc,pdf,docx,zip,txt,svg|max:10000',
+        ]);
+        if ($validator->passes()) {
+            $image = $request->file('attachment');
+            $name  = time().'.'.$image->getClientOriginalName();
+            $destinationPath = public_path('/images/employee_doc');
+            $image->move($destinationPath, $name);
+            Employee_document::create([
+                'document'=> $name,
+                'emp_id'   =>$request->emp_id
+            ]);
+            return response()->json(['success'=>$name]);
+        }
+        return response()->json(['error'=>'yes']);
+    }
+    Public function get_developers_docs(Request $request){
+        $id    = $request->input('id');
+        if(!empty($id)){
+            return Employees::find($id)->get_developers_docs()->get();
+        }
+    }
+    Public Function remove_employee_doc(Request $request){
+        $id         = $request->input('id');
+        $img_src    = $request->input('img_src');
+        $task       = Employee_document::findOrFail($id);
+        $path       = url('images/employee_doc'.$img_src);
+        $data       = $task->delete();
+        return response()->json($data);
+    }
 }

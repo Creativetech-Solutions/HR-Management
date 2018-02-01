@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Projects;
 
 use App\model\Clients;
+use App\model\Milestone;
 use App\model\Task;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -163,14 +164,24 @@ class Projects extends Controller
     }
     public function store(Request $request)
     {
+        $project_manager = $request->project_manager;
+        $developer      = !empty($request->developers) ? implode(',',$request->developers): " ";
+        $pos = strpos($developer,$project_manager);
+        if(!empty($pos)){
+            $developer      = $developer;
+        }else{
+            $developer      = $developer.",$project_manager";
+        }
+
         $Last_array = Project::create([
             'name'               => $request->name,
             'budget'             => $request->budget,
-            'currency'           => $request->currency,
-            'project_manager'    => $request->project_manager,
+            'project_manager'    => $project_manager,
+            'description'        => $request->description,
             'required_skills'    => !empty($request->required_skills) ? implode(',',$request->required_skills): " ",
+            'developers'         => $developer,
             'project_status'     => $request->project_status,
-            'payment_status'     => $request->payment_status,
+            'payment_status'     => 1,
             'start_date'         => date("Y-m-d H:i:s",strtotime($request->start_date)),
             'due_date'           => date("Y-m-d H:i:s",strtotime($request->due_date)),
             'client_id'          => $request->client_id,
@@ -198,14 +209,22 @@ class Projects extends Controller
     }
     public function update(Request $request,$id)
     {
+        $project_manager           = $request->project_manager;
+        $developer                 = !empty($request->developers) ? implode(',',$request->developers): " ";
+        $pos = strpos($developer,$project_manager);
+        if(!empty($pos)){
+            $developer      = $developer;
+        }else{
+            $developer      = $developer.",$project_manager";
+        }
         $projects                  = Project::find($id);
         $projects->name            = $request->name;
         $projects->budget          = $request->budget;
-        $projects->currency        = $request->currency;
-        $projects->project_manager = $request->project_manager;
+        $projects->project_manager = $project_manager;
+        $projects->description     = $request->description;
         $projects->required_skills = !empty($request->required_skills) ? implode(',',$request->required_skills): " ";
+        $projects->developers      = $developer;
         $projects->project_status  = $request->project_status;
-        $projects->payment_status  = $request->payment_status;
         $projects->start_date      = date("Y-m-d H:i:s",strtotime($request->start_date));
         $projects->due_date        = date("Y-m-d H:i:s",strtotime($request->due_date));
         $projects->client_id       = $request->client_id;
@@ -254,9 +273,6 @@ class Projects extends Controller
         return response()->json($data);
     }
     public function dashboard($id){ // project Dashboard
-
-        $action_url   =  'tasks/store';
-        $action_url2  =  'milestones/store';
         $projects     =  Project::find($id);
         $client       =  Project::find($id)->get_client_data; // get Client that belong to projects
         $all_tasks    =  DB::table('tasks as ts')->select('ts.id','ts.assigned_by','ts.assigned_to','us.name as ass_by','ts.name as task_name','man.name as ass_to','ts.description','ts.status','ts.due_date','ts.updated_at')
@@ -275,28 +291,29 @@ class Projects extends Controller
         $project_develop    =  explode(",",$projects->developers);
         $project_developers =  User::find($project_develop);
         $employee           =  DB::table('employee as em')->select('us.name','us.id')->Join('users as us', 'em.user_id', '=', 'us.id')->where('us.status','=','1')->get();
-        $skills             =  DB::table('skills')->get();
-        // $client       =  DB::table('clients as cl')->select('us.name','cl.id')->leftJoin('users as us', 'cl.user_id', '=', 'us.id')->where('us.status','=','1')->get();
-        $currency     =  Countries::all();
-        $milestones   =  " ";
+        $currency           =  Countries::all();
+        $milestones         = Project::find($id)->get_mile_stone;
+        $m_tasks = array();
+        foreach($milestones as $milestone_id){
+           $m_id = explode(",",$milestone_id->tasks);
+           $m_tasks[$milestone_id->id] = Task::find($m_id);
+        }
         $task_developer = array();
         foreach($all_tasks as $task){
             $task_developer[$task->assigned_to][] = $task;
         }
         return view('projects.dashboard', [
-            'action_url'      => $action_url,
-            'action_url2'     => $action_url2,
-            'users'           => $users,
-            'employee'        => $employee,
-            'skills'          => $skills,
-            'currency'        => $currency,
-            'projects'        => $projects,
-            'milestones'      => $milestones,
-            'projects_man'    => $projects_man,
-            'project_dev'     => $project_developers,
-            'tasks'           => $all_tasks,
-            'task_developer'  => $task_developer,
+             'users'           => $users,
+             'employee'        => $employee,
+             'currency'        => $currency,
+             'projects'        => $projects,
+             'milestones'      => $milestones,
+             'projects_man'    => $projects_man,
+             'project_dev'     => $project_developers,
+             'tasks'           => $all_tasks,
+             'task_developer'  => $task_developer,
              'com_tasks'      => $completed_tasks,
+             'm_tasks'        => $m_tasks,
         ]);
     }
 }

@@ -15,16 +15,17 @@ class CreateMilestoneTable extends Migration
     {
         Schema::create('milestones', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('emp_id')->unsigned();
+          //  $table->integer('emp_id')->unsigned();
             $table->integer('project_id')->unsigned();
-            $table->foreign('emp_id')->references('id')->on('users');
+          //  $table->foreign('emp_id')->references('id')->on('users');
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->string('title');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->integer('budget')->nullable();
             $table->string('currency')->nullable();
-            $table->integer('mile_status');
-            $table->integer('payment_status');
+            $table->string('tasks')->nullable();
+            $table->integer('mile_status')->nullable();
+            $table->integer('payment_status')->nullable();
             $table->string('start_date',50)->nullable();
             $table->string('due_date',50)->nullable();
             $table->timestamps();

@@ -54,7 +54,7 @@
             $('.custom-button').text('Delete');
             $('.custom-button').addClass('delete');
             $('#id_delete').val($(this).data('id'));
-            $('#name').val($(this).data('title'));
+            $('.change_name').val($(this).data('title'));
             $('#title_delete').val($(this).data('content'));
             $('#deleteModal').modal('show');
             id = $('#id_delete').val();
@@ -82,7 +82,7 @@
             $('.custom-button').text(status_val);
             $('.custom-button').addClass('status_Change');
             $('#id_delete').val($(this).data('id'));
-            $('#name').val($(this).data('title'));
+            $('.change_name').val($(this).data('title'));
             $('#title_delete').val($(this).data('content'));
             $('#deleteModal').modal('show');
             $('.skills_hide').hide();

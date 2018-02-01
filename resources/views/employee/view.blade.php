@@ -26,7 +26,6 @@
                         <th>Id</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Country</th>
                         <th>Last Increment</th>
                         <th>Total leaves</th>
                         <th>Status</th>
@@ -48,7 +47,6 @@
                 { data: 'id', name: 'id' },
                 { data: 'name', name: 'name' },
                 { data: 'email', name: 'email' },
-                { data: 'country', name: 'country' },
                 { data: 'last_increment', name: 'last_increment' },
                 { data: 'total_leaves', name: 'total_leaves' },
                 { data: 'status', name: 'status' },
@@ -63,7 +61,7 @@
             $('.custom-button').text('Delete');
             $('.custom-button').addClass('delete');
             $('#id_delete').val($(this).data('id'));
-            $('#name').val($(this).data('title'));
+            $('.change_name').val($(this).data('title'));
             $('#title_delete').val($(this).data('content'));
             $('#deleteModal').modal('show');
             id = $('#id_delete').val();

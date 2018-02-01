@@ -11,5 +11,8 @@ class Employees extends Model
     public function skills(){
         return $this->hasMany('App\model\Skills');
     }
+    Public function get_developers_docs(){
+        return $this->hasMany('App\model\Employee_document','emp_id');
+    }
 
 }

@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\Tasks;
 
+use Doctrine\DBAL\Schema\Table;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage; //for removing file form storage
 use App\Http\Controllers\Controller;
 use DataTables;
 use App\User;  // call user model
 use App\model\Project;
 use App\model\Task;
 use App\model\Task_activity;
+use App\model\Task_reviews;
+use App\model\Task_attachment;
 use Countries;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -206,9 +210,59 @@ class Tasks extends Controller
         $data     = $task->delete();
         return response()->json($data);
     }
+    public function remove_task_file(Request $request)
+    {
+        $id         = $request->input('id');
+        $img_src    = $request->input('img_src');
+        $task       = Task_attachment::findOrFail($id);
+        $path       = url('images/'.$img_src);
+        $data       = $task->delete();
+        return response()->json($data);
+    }
     public function get_activities($id){
         return Task::find($id)->getactivity()->get();
     }
+    public function store_review(Request $request){
+
+        $t_id = $request->t_id;
+        $last_id = Task_reviews::create([
+
+            'user_id' => !empty( Auth::user()->id) ? Auth::user()->id  : " ",
+            'task_id' => $t_id,
+            'review'  => $request->review,
+        ]);
+         if(!empty($last_id->id)){
+             return response()->json(['success'=>'done']);
+         }
+    }
+    public function get_reviews($id){
+       return $reviews  = DB::table('task_reviews as review')->select('review.review','review.updated_at','us.name','us.email')->leftjoin('users as us','review.user_id','=','us.id')->where('review.task_id','=',$id)->get();
+    }
+    Public function upload_files(Request $request){
+        {
+           $validator = Validator::make($request->all(), [
+                'attachment' => 'mimes:jpeg,png,jpg,gif,doc,pdf,docx,zip,txt,svg|max:10000',
+           ]);
+           if ($validator->passes()) {
+               $image = $request->file('attachment');
+               $name  = time().'.'.$image->getClientOriginalName();
+               $destinationPath = public_path('/images');
+               $image->move($destinationPath, $name);
+               Task_attachment::create([
+                   'attachment'=> $name,
+                   'task_id'   =>$request->task_id
+               ]);
+               return response()->json(['success'=>$name]);
+           }
+           return response()->json(['error'=>'yes']);
+        }
+    }
+    Public function get_task_attachmetns(Request $request){
+        $id    = $request->id;
+        if(!empty($id)){
+            return Task::find($id)->task_attachmetns()->get();
+
+        }
+
+   }
 }
-
-

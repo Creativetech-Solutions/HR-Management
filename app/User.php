@@ -35,6 +35,6 @@ class User extends Authenticatable
         return $this->hasOne('App\model\Employees');
     }
     public function get_projects(){
-        return $this->hasOne('App\model\Project','project_manager');
+        return $this->hasMany('App\model\Project','developers');
     }
 }

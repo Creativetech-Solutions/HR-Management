@@ -33,14 +33,14 @@
                                 <input type="text" placeholder="Insert your First Name" class="form-control" id="firstname" name="first_name"
                                        value="<?php if(!empty($user->first_name )){echo $user->first_name ;}?>">
                             </div>
-
-
-                            <div class="form-group">
-                                <label class="control-label">
-                                    Password <span class="symbol required"></span>
-                                </label>
-                                <input type="password" class="form-control" name="password" id="password">
-                            </div>
+                            <?php if(empty($user->id)){ ?>
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        Password <span class="symbol required"></span>
+                                    </label>
+                                    <input type="password" class="form-control" name="password" id="password">
+                                </div>
+                            <?php } ?>
                             <div class="form-group">
                                 <label>
                                     Skills
@@ -55,34 +55,61 @@
                                     ?>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label>  Country </label>
-
-                                <select   name="country" class="js-example-placeholder-single js-country form-control">
-                                    <?php
-                                    !empty($dev_data->country) ? $cl_country = $user->country : $cl_country = " ";
-                                     if($countries->count()){
-                                         foreach($countries as $country){?>
-                                           <option value="<?= $country->name->common ?>"
-                                                    <?php if(isset($user->country) && $user->country == $country->name->common  ){echo "selected";} ?> >
-                                                 <?= $country->name->common ?></option> <?php
-                                         }
-                                     }
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
+                             <div class="form-group">
                                 <label class="control-label">
                                     Join date <span class=""></span>
                                 </label>
                                 <input type="text" placeholder="join date" class="form-control datepicker" id="join_date" name="join_date"
                                        value="<?= !empty($dev_data->join_date) ? $dev_data->join_date : " " ?>">
                             </div>
+
+
                             <div class="form-group">
                                 <label class="control-label">
-                                    Zip Code
+                                    Phone <span class=""></span>
                                 </label>
-                                <input class="form-control" type="text" name="zipcode" id="zipcode" value="<?php if(!empty($user->zipcode )){ echo $user->zipcode ;} ?>">
+                                <input type="text" placeholder="Phone No" class="form-control" id="phone" name="phone"
+                                       value="<?php if(!empty($user->phone)){ echo  $user->phone; } ?>">
+                            </div>
+
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">
+                                    User Name <span class=""></span>
+                                </label>
+                                <input class="form-control tooltips" type="text" data-original-title="We'll display it when you write reviews" data-rel="tooltip"
+                                       title="" data-placement="top" name="user_name" id="name" placeholder="User Name" value="<?php if(!empty($user->name)){echo $user->name ;} ?>">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">
+                                    Last Name <span class=""></span>
+                                </label>
+                                <input type="text" placeholder="Insert your Last Name" class="form-control" id="lastname" name="last_name"
+                                       value="<?php if(!empty($user->last_name)){echo $user->last_name ;} ?>">
+                            </div>
+                            <?php if(empty($user->id)){ ?>
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        Confirm Password <span class="symbol required"></span>
+                                    </label>
+                                    <input type="password" class="form-control" id="password_again" name="password_again">
+                                </div>
+                            <?php } ?>
+                            <div class="form-group">
+                                <label class="control-label">
+                                    Salary <span class=""></span>
+                                </label>
+                                <input type="text" class="form-control" name="salary" id="salary" placeholder="Salary"
+                                       value="<?php if(!empty($dev_data->salary)){ echo $dev_data->salary; }  ?>">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">
+                                    Last Increment <span class=""></span>
+                                </label>
+                                <input type="text" placeholder="last Increment" class="form-control datepicker" id="last_increment" name="last_increment"
+                                       value="<?= !empty($dev_data->last_increment) ? $dev_data->last_increment : " " ?>">
                             </div>
                             <div class="form-group">
                                 <label class="control-label">
@@ -100,63 +127,10 @@
                                     </label>
                                 </div>
                             </div>
-
-
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label">
-                                    User Name <span class=""></span>
-                                </label>
-                                <input class="form-control tooltips" type="text" data-original-title="We'll display it when you write reviews" data-rel="tooltip"
-                                       title="" data-placement="top" name="name" id="name" placeholder="User Name" value="<?php if(!empty($user->name)){echo $user->name ;} ?>">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">
-                                    Last Name <span class=""></span>
-                                </label>
-                                <input type="text" placeholder="Insert your Last Name" class="form-control" id="lastname" name="last_name"
-                                       value="<?php if(!empty($user->last_name)){echo $user->last_name ;} ?>">
-                            </div>
 
-                            <div class="form-group">
-                                <label class="control-label">
-                                    Confirm Password <span class="symbol required"></span>
-                                </label>
-                                <input type="password" class="form-control" id="password_again" name="password_again">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">
-                                    Salary <span class=""></span>
-                                </label>
-                                <input type="text" class="form-control" name="salary" id="salary" placeholder="Salary"
-                                       value="<?php if(!empty($dev_data->salary)){ echo $dev_data->salary; }  ?>">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">
-                                    City <span class=""></span>
-                                </label>
-                                <input type="text" class="form-control" name="city" id="city" placeholder="City"
-                                       value="<?php if(!empty($user->city)){echo $user->city ;} ?>">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">
-                                    Last Increment <span class=""></span>
-                                </label>
-                                <input type="text" placeholder="last Increment" class="form-control datepicker" id="last_increment" name="last_increment"
-                                       value="<?= !empty($dev_data->last_increment) ? $dev_data->last_increment : " " ?>">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">
-                                    Phone <span class=""></span>
-                                </label>
-                                <input type="text" placeholder="Phone No" class="form-control" id="phone" name="phone"
-                                       value="<?= !empty($user->phone) ? $user->phone : " " ?>">
-                            </div>
-
-
-                     </div>
                     </div>
+
                 </form>
                 <button class="btn btn-primary btn-wide pull-right" type="submit" id="name_id">
                     Submit <i class="fa fa-arrow-circle-right"></i>

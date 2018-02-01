@@ -41,18 +41,28 @@
             </div>
             <div class="form-group">
                 <label>
-                    Required Skills
+                    Select Developers
                 </label>
-                <select multiple="" name="required_skills[]" class="js-example-basic-multiple js-states form-control">
+                <select multiple="" name="developers[]" class="js-example-basic-multiple js-states form-control">
+
                     <?php
-                    $projects_skills = !empty($projects->required_skills) ?  $projects->required_skills: " ";
-                    if(!empty($skills)){
-                    foreach ($skills as $skill) { ?>
-                    <option value="<?= $skill->id ?>"<?php if( in_array( $skill->id ,explode(",",$projects_skills))){ echo "selected"; }?>> <?= $skill->skill_name ?></option>
-                        <?php }}
-                        ?>
+                    $projectsdevelopers = !empty($projects->developers) ?  $projects->developers: " ";
+                    if($employee){
+                    foreach($employee as $employees){?>
+                    <option value="<?= $employees->id ?>" <?php if(in_array( $employees->id ,explode(",",$projectsdevelopers))){ echo "Selected";}?>>
+                        <?= $employees->name ?></option>
+                    <?php }}?>
+
                 </select>
             </div>
+            <div class="form-group">
+                <label class="control-label">
+                    Project Start Date <span class=""></span>
+                </label>
+                <input type="text" placeholder="Project Start Date" class="form-control datepicker" id="start_date" name="start_date"
+                       value="<?= !empty($projects->start_date) ? $projects->start_date : " " ?>">
+            </div>
+
             <div class="form-group">
                 <label>
                     Project Status
@@ -64,13 +74,7 @@
                     <option value="4"<?php if(isset($projects->project_status) && $projects->project_status == 4 ){echo "selected";}?> > Drop</option>
                 </select>
             </div>
-            <div class="form-group">
-                <label class="control-label">
-                    Project Start Date <span class=""></span>
-                </label>
-                <input type="text" placeholder="Project Start Date" class="form-control datepicker" id="start_date" name="start_date"
-                       value="<?= !empty($projects->start_date) ? $projects->start_date : " " ?>">
-            </div>
+
         </div>
         <div class="col-md-6">
             <div class="form-group">
@@ -93,40 +97,64 @@
                 </select>
             </div>
             <div class="form-group">
+                <label>
+                    Required Skills
+                </label>
+                <select multiple="" name="required_skills[]" class="js-example-basic-multiple js-states form-control">
+                    <?php
+                    $projects_skills = !empty($projects->required_skills) ?  $projects->required_skills: " ";
+                    if(!empty($skills)){
+                    foreach ($skills as $skill) { ?>
+                    <option value="<?= $skill->id ?>"<?php if( in_array( $skill->id ,explode(",",$projects_skills))){ echo "selected"; }?>> <?= $skill->skill_name ?></option>
+                    <?php }}
+                    ?>
+                </select>
+            </div>
+           <!-- <div class="form-group">
                 <label class="control-label">
                     Currency <span class=""></span>
                 </label>
                 <select   name="currency" class="js-example-placeholder-single form-control">
                     <?php
-                    if($currency){
-                      foreach($currency as $currency){
-                         foreach($currency->currency as $cr){?>
-                             <option value="<?= $cr['ISO4217Code'] ?>" <?php if(isset($projects->currency) && $projects->currency == $cr['ISO4217Code'] ){ echo "Selected";}?> >
-                               <?= $cr['sign'] ."  ".$cr['ISO4217Code'] . "   ".$cr['title']  ?>
+                   // if($currency){
+                   //   foreach($currency as $currency){
+                        // foreach($currency->currency as $cr){?>
+                             <option value="<?php // $cr['ISO4217Code'] ?>" <?php // if(isset($projects->currency) && $projects->currency == $cr['ISO4217Code'] ){ echo "Selected";}?> >
+                               <?php // $cr['sign'] ."  ".$cr['ISO4217Code'] . "   ".$cr['title']  ?>
                              </option>
                         <?php
-                         }
-                      }
-                    }?>
+                       //  } } }?>
                 </select>
-            </div>
-            <div class="form-group">
+            </div> -->
+            <!--<div class="form-group">
                 <label>
                     Payment Status
                 </label>
                 <select  name="payment_status" class="js-example-placeholder-single js-country form-control" placeholder="Slect User Role">
-                    <option value="1" <?php if(isset($projects->payment_status) && $projects->payment_status== 1 ){echo "selected";}?> > Pending     </option>
-                    <option value="2" <?php if(isset($projects->payment_status) && $projects->payment_status== 2 ){echo "selected";}?> > Incomplete  </option>
-                    <option value="3" <?php if(isset($projects->payment_status) && $projects->payment_status== 3 ){echo "selected";}?> > Paid        </option>
-                    <option value="4" <?php if(isset($projects->payment_status) && $projects->payment_status== 4 ){echo "selected";}?> > Cancelled   </option>
+                    <option value="1" <?php // if(isset($projects->payment_status) && $projects->payment_status== 1 ){echo "selected";}?> > Pending     </option>
+                    <option value="2" <?php // if(isset($projects->payment_status) && $projects->payment_status== 2 ){echo "selected";}?> > Incomplete  </option>
+                    <option value="3" <?php // if(isset($projects->payment_status) && $projects->payment_status== 3 ){echo "selected";}?> > Paid        </option>
+                    <option value="4" <?php // if(isset($projects->payment_status) && $projects->payment_status== 4 ){echo "selected";}?> > Cancelled   </option>
                 </select>
-            </div>
+            </div> -->
             <div class="form-group">
                 <label class="control-label">
                     Project End Date <span class=""></span>
                 </label>
                 <input type="text" placeholder="Project End Date" class="form-control datepicker" id="due_date" name="due_date"
                        value="<?= !empty($projects->due_date) ? $projects->due_date : " " ?>">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="control-label">
+                    Descriptions <span class=""></span>
+                </label>
+                <textarea name="description" class="form-control">
+                    <?= !empty($projects->description) ? $projects->description  : " " ?>
+                 </textarea>
             </div>
         </div>
     </div>

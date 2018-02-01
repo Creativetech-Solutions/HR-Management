@@ -628,7 +628,7 @@
                         <label class="control-label col-sm-2" for="id">Name:</label>
                         <div class="col-sm-9">
                             <input type="hidden" class="form-control" id="id_delete" disabled>
-                            <input type="text" class="form-control" id="name" disabled>
+                            <input type="text" class="form-control change_name" id="" disabled>
                         </div>
                     </div>
                     <div class="form-group skills_hide">
@@ -683,8 +683,6 @@
 {!!Html::script('assets/js/table-data.js')!!}
 {!!Html::script('assets/js/form-elements.js')!!}
 {!!Html::script('vendor/bootstrap-fileinput/jasny-bootstrap.js')!!}
-
-
 
 <script>
     jQuery(document).ready(function() {

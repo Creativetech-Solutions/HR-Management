@@ -60,7 +60,7 @@
             $('.custom-button').text('Update Salary');
             $('.custom-button').addClass('inc_salary');
             $('#id_delete').val($(this).data('id'));
-            $('#name').val($(this).data('title'));
+            $('.change_name').val($(this).data('title'));
             status = $(this).data('status');
             $('#title_delete').val($(this).data('content'));
             $('#deleteModal').modal('show');

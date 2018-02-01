@@ -27,7 +27,7 @@ class Users extends Controller
     public function getData() // get data form user table
     {
         $users = DB::table('users')
-           ->select('id','name as name','email as email','user_type as user_type','country as country','status as status');
+           ->select('id','name as name','email as email','user_type as user_type','status as status');
         $data = Datatables::of($users)
             ->escapeColumns()
             ->addColumn('action', function ($users) {
@@ -60,9 +60,6 @@ class Users extends Controller
             'name'         => $request->name,
             'first_name'   => $request->first_name,
             'last_name'    => $request->last_name,
-            'city'         => $request->city,
-            'country'      => $request->country,
-            'zipcode'      => $request->zipcode,
             'user_type'    => $request->user_type ? implode(',',$request->user_type):" ",
             'status'       => '0',
             'active'       => '0',
@@ -99,9 +96,6 @@ class Users extends Controller
         $User->name          = $request->name;
         $User->first_name    = $request->first_name;
         $User->last_name     = $request->last_name;
-        $User->city          = $request->city;
-        $User->country       = $request->country;
-        $User->zipcode       = $request->zipcode;
         $User->gender        = $request->gender;
         $User->user_type     = $request->user_type ? implode(',',$request->user_type):" ";
         $User->password      = bcrypt($request->password);

@@ -33,14 +33,18 @@
                                 <input type="text" placeholder="Insert your First Name" class="form-control" id="firstname" name="first_name"
                                        value="<?php if(!empty($user->first_name )){echo $user->first_name ;}?>">
                             </div>
-
-
-                            <div class="form-group">
+                            <?php if(empty($user->id)){ ?>
+                                <div class="form-group">
                                 <label class="control-label">
                                     Password <span class="symbol required"></span>
                                 </label>
                                 <input type="password" class="form-control" name="password" id="password">
                             </div>
+
+                            <?php } ?>
+
+
+
                             <div class="form-group">
                                 <label>
                                     Required Skills
@@ -95,13 +99,15 @@
                                 <input type="text" placeholder="Insert your Last Name" class="form-control" id="lastname" name="last_name"
                                        value="<?php if(!empty($user->last_name)){echo $user->last_name ;} ?>">
                             </div>
+                            <?php if(empty($user->id)){ ?>
 
-                            <div class="form-group">
-                                <label class="control-label">
-                                    Confirm Password <span class="symbol required"></span>
-                                </label>
-                                <input type="password" class="form-control" id="password_again" name="password_again">
-                            </div>
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        Confirm Password <span class="symbol required"></span>
+                                    </label>
+                                    <input type="password" class="form-control" id="password_again" name="password_again">
+                                </div>
+                            <?php } ?>
                             <div class="form-group">
                                 <label class="control-label">
                                     PlatForm <span class=""></span>

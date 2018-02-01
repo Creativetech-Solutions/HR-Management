@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Milestones;
 
+use App\model\Task;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DataTables;
@@ -85,18 +86,34 @@ class Milestones extends Controller
     {
         $Last_array = Milestone::create([
             'title'              => $request->title,
-            'description'              => $request->description,
+            'description'        => $request->description,
             'budget'             => $request->budget,
             'currency'           => $request->currency,
-            'emp_id'             => $request->emp_id,
-            'mile_status'        => $request->mile_status,
+            'tasks'              => !empty($request->tasks) ? (implode(',',$request->tasks)) : " ",
+            'mile_status'        => 1,
             'payment_status'     => $request->payment_status,
             'start_date'         => date("Y-m-d H:i:s",strtotime($request->start_date)),
             'due_date'           => date("Y-m-d H:i:s",strtotime($request->due_date)),
-            'project_id'          => $request->project_id,
+            'project_id'         => $request->pro_id,
         ]);
-        return redirect('milestones')->with('message', 'Milestone Added successfully!');
+      return $Last_array->id;
     }
+//public function store(Request $request) old
+//    {
+//        $Last_array = Milestone::create([
+//            'title'              => $request->title,
+//            'description'        => $request->description,
+//            'budget'             => $request->budget,
+//            'currency'           => $request->currency,
+//            'emp_id'             => $request->emp_id,
+//            'mile_status'        => $request->mile_status,
+//            'payment_status'     => $request->payment_status,
+//            'start_date'         => date("Y-m-d H:i:s",strtotime($request->start_date)),
+//            'due_date'           => date("Y-m-d H:i:s",strtotime($request->due_date)),
+//            'project_id'          => $request->project_id,
+//        ]);
+//        return redirect('milestones')->with('message', 'Milestone Added successfully!');
+//    }
 
     public function edit($id)
     {
@@ -133,6 +150,23 @@ class Milestones extends Controller
 
         return redirect('milestones')->with('message', 'Milestone Updated successfully!');
     }
+
+    public function view_mile_stone_data(Request $request){
+        $id     = $request->id;
+      return  $m_datas = Milestone::find($id)->first();
+      // get task id and show in the table
+        print_r($m_datas);
+        $m_datas[] = " ";
+        echo  $tasks =  $m_datas['tasks'];
+        $task  =  !empty($tasks) ? (explode(',',$tasks)) : '';
+        $tasks = Task::find($task);
+        print_r($tasks);
+
+
+      //  return data;
+    }
+
+
 
     public function change_status(Request $request){
         $id              = $request->input('id');
